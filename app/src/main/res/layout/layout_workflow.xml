@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/id_workflow_layout"
+    android:layout_width="match_parent"
+    android:layout_height="400dp"
+    android:gravity="center_horizontal"
+    android:layout_below="@+id/id_tv_VF"
+    android:layout_marginTop="5dp"
+    android:background="@drawable/tv_duration">
+
+    <TextView
+        android:id="@+id/id_workflow_step1"
+        android:layout_width="200dp"
+        android:layout_height="25dp"
+        android:layout_marginTop="30dp"
+        android:layout_centerHorizontal="true"
+        android:gravity="center"
+        android:background="@drawable/tv_workflow_step"
+        android:text="02:28 Started:VF" />
+
+    <ImageView
+        android:id="@+id/id_iv_bjt1"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:src="@drawable/bjt"
+        android:layout_below="@+id/id_workflow_step1"
+        android:layout_centerHorizontal="true" />
+
+    <LinearLayout
+        android:id="@+id/id_shockdone_layout"
+        android:layout_width="150dp"
+        android:layout_height="45dp"
+        android:orientation="horizontal"
+        android:background="@drawable/tv_workflow_step"
+        android:layout_below="@+id/id_iv_bjt1"
+        android:gravity="center"
+        android:layout_centerHorizontal="true">
+
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_margin="5dp"
+            android:src="@drawable/shock_done" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:text="Shock\nDone"/>
+
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/id_iv_ljt"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:src="@drawable/ljt"
+        android:layout_below="@+id/id_shockdone_layout"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:id="@+id/id_workflow_step3"
+        android:layout_width="80dp"
+        android:layout_height="25dp"
+        android:layout_centerHorizontal="true"
+        android:gravity="center"
+        android:layout_below="@+id/id_iv_ljt"
+        android:background="@drawable/tv_workflow_step3"
+        android:text="CPR" />
+
+    <ImageView
+        android:id="@+id/id_iv_bjt2"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:src="@drawable/bjt"
+        android:layout_below="@+id/id_workflow_step3"
+        android:layout_centerHorizontal="true" />
+
+    <LinearLayout
+        android:id="@+id/id_EPI_layout"
+        android:layout_width="100dp"
+        android:layout_height="30dp"
+        android:orientation="horizontal"
+        android:background="@drawable/tv_workflow_step3"
+        android:layout_below="@+id/id_iv_bjt2"
+        android:gravity="center"
+        android:layout_centerHorizontal="true">
+
+        <ImageView
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_margin="5dp"
+            android:padding="2dp"
+            android:src="@drawable/inject" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:text="EPI"/>
+
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/id_iv_bjt3"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:src="@drawable/bjt"
+        android:layout_below="@+id/id_EPI_layout"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:id="@+id/id_workflow_step5"
+        android:layout_width="120dp"
+        android:layout_height="25dp"
+        android:layout_centerHorizontal="true"
+        android:gravity="center"
+        android:layout_below="@+id/id_iv_bjt3"
+        android:background="@drawable/tv_workflow_step3"
+        android:text="Check Rhythm" />
+
+</RelativeLayout>

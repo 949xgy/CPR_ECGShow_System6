@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="800dp"
+    android:layout_height="match_parent"
+    >
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_gravity="center_horizontal">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="房性心动过速参照图"
+            android:textStyle="bold"
+            android:textSize="30sp"/>
+        <ImageView
+            android:layout_width="800dp"
+            android:layout_height="200dp"
+            android:background="@drawable/ecg10_bg"
+            android:scaleType="fitXY"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="30sp"
+            android:text="P波：P波可能与前一心动的T波融合而不易辨认"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="30sp"
+            android:text="PP间距:通常在120-250 次/分之间"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="30sp"
+            android:text="心房率：发作时节律整齐"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="30sp"
+            android:text="QRS波：QRS波时限在0.06-0.10 秒的正常范围内，但当合并有差异性传导时，波形增宽，时限延长"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="30sp"
+            android:text="RR间距：通常在120-250 次/分之间"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="30sp"
+            android:text="心室率：发作时节律整齐"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="30sp"
+            android:text="PR间距：PR间期缩短，有时难以测定"/>
+        <TextView
+            android:layout_marginTop="20dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="30sp"
+            android:text="病因分析：1.洋地黄中毒 2.冠心病 3.慢性肺部疾病 4.急性心肌梗塞 5.情绪紧张 6.缺氧 7.风湿性心脏病 8.高血压心脏病"/>
+        <TextView
+            android:layout_marginTop="20dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="30sp"
+            android:text="治疗相关：对于顽固性房性心动过速可通过迷走神经刺激。对血液动力学不稳定的患者可以用异搏定或同步点击复律治疗"/>
+    </LinearLayout>
+</ScrollView>

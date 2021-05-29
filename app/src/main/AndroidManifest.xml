@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.example.tjw.cpr_ecgshow_system">
+    <!-- 网络权限 -->
+    <uses-permission android:name="android.permission.INTERNET" /> <!-- 允许程序添加悬浮窗 -->
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@drawable/yl"
+        android:label="@string/app_name"
+        android:roundIcon="@drawable/yl"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme"
+        >
+        <activity
+            android:name=".Main2Activity"
+            android:label="@string/title_activity_main2"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity android:name=".ECGIntroduceActivity" />
+        <activity android:name=".LoginActivity">
+<!--            <intent-filter>-->
+<!--                <action android:name="android.intent.action.MAIN" />-->
+
+<!--                <category android:name="android.intent.category.LAUNCHER" />-->
+<!--            </intent-filter>-->
+        </activity>
+
+
+
+        <activity
+            android:name=".TransitionActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+
+        <activity android:name=".RegisterActivity" />
+        <activity android:name=".ECGShowActivity" />
+
+        <service
+            android:name=".ServiceBag.dataService"
+            android:enabled="true"
+            android:exported="true" />
+        <service
+            android:name=".ServiceBag.oprationService"
+            android:enabled="true"
+            android:exported="true" />
+        <service
+            android:name=".ServiceBag.CompleteInjService"
+            android:enabled="true"
+            android:exported="true" />
+        <service
+            android:name=".ServiceBag.CompleteShockService"
+            android:enabled="true"
+            android:exported="true" />
+
+        <activity android:name=".MenuActivity" />
+        <activity android:name=".DoctorActivity" />
+        <activity android:name=".PatientActivity" />
+
+        <activity android:name=".ECG_heartActivity">
+<!--            <intent-filter>-->
+<!--                <action android:name="android.intent.action.MAIN" />-->
+
+<!--                <category android:name="android.intent.category.LAUNCHER" />-->
+<!--            </intent-filter>-->
+        </activity>
+
+
+        <service
+            android:name=".ServiceBag.SendECGService"
+            android:enabled="true"
+            android:exported="true" />
+    </application>
+
+</manifest>

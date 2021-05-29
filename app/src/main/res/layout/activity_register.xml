@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg_2">
+
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@drawable/bar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:navigationIcon="@drawable/back_bar">
+
+        <TextView
+            android:id="@+id/text_bar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="欢迎进入注册界面"
+            android:textSize="25dp" />
+
+
+    </android.support.v7.widget.Toolbar>
+
+
+    <EditText
+        android:id="@+id/et_doctorName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="0dp"
+        android:layout_marginEnd="1dp"
+        android:drawableLeft="@drawable/re_user"
+
+        android:drawablePadding="10dp"
+        android:ems="11"
+        android:hint="用户名"
+        android:inputType="textPersonName"
+        app:layout_constraintEnd_toStartOf="@+id/guideline"
+        app:layout_constraintHorizontal_bias="0.444"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar" />
+
+    <EditText
+        android:id="@+id/et_doctorPass"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="1dp"
+
+        android:drawableLeft="@drawable/re_password"
+
+        android:drawablePadding="10dp"
+        android:ems="11"
+        android:hint="密码"
+        android:inputType="textPassword"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/guideline"
+        app:layout_constraintTop_toTopOf="@+id/et_doctorName" />
+
+    <EditText
+        android:id="@+id/et_doctorPhone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="11dp"
+        android:drawableLeft="@drawable/re_phone"
+        android:drawablePadding="10dp"
+        android:ems="11"
+        android:hint="手机号"
+        android:inputType="phone"
+        app:layout_constraintEnd_toEndOf="@+id/et_doctorName"
+        app:layout_constraintTop_toBottomOf="@+id/et_doctorName" />
+
+    <EditText
+        android:id="@+id/et_doctorID"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:drawableLeft="@drawable/re_id"
+        android:drawablePadding="10dp"
+        android:ems="11"
+        android:hint="身份证号"
+        android:inputType="textPersonName"
+        app:layout_constraintStart_toStartOf="@+id/et_doctorPass"
+        app:layout_constraintTop_toTopOf="@+id/et_doctorPhone" />
+
+    <EditText
+        android:id="@+id/et_doctorAge"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="11dp"
+        android:drawableLeft="@drawable/re_age"
+        android:drawablePadding="10dp"
+        android:ems="11"
+        android:hint="年龄"
+        android:inputType="number"
+        app:layout_constraintEnd_toEndOf="@+id/et_doctorPhone"
+        app:layout_constraintTop_toBottomOf="@+id/et_doctorPhone" />
+
+    <EditText
+        android:id="@+id/et_doctorDept"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:drawableLeft="@drawable/re_department"
+        android:drawablePadding="10dp"
+        android:ems="11"
+        android:hint="所在科室"
+        android:inputType="textPersonName"
+        app:layout_constraintStart_toStartOf="@+id/et_doctorID"
+        app:layout_constraintTop_toTopOf="@+id/et_doctorAge" />
+
+    <EditText
+        android:id="@+id/et_doctorDuty"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="11dp"
+        android:drawableLeft="@drawable/re_job"
+        android:drawablePadding="10dp"
+        android:ems="11"
+        android:hint="职务"
+        android:inputType="textPersonName"
+        app:layout_constraintEnd_toEndOf="@+id/et_doctorAge"
+        app:layout_constraintTop_toBottomOf="@+id/et_doctorAge" />
+
+    <EditText
+        android:id="@+id/et_doctorEmail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:drawableLeft="@drawable/re_email"
+        android:drawablePadding="10dp"
+        android:ems="11"
+        android:hint="邮箱"
+        android:inputType="textEmailAddress"
+        app:layout_constraintStart_toStartOf="@+id/et_doctorDept"
+        app:layout_constraintTop_toTopOf="@+id/et_doctorDuty" />
+
+    <android.support.constraint.Guideline
+        android:id="@+id/guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.5" />
+
+    <RadioGroup
+        android:id="@+id/doctorSex"
+        android:layout_width="212dp"
+        android:layout_height="34dp"
+        android:layout_marginTop="8dp"
+        android:checkedButton="@+id/man"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/et_doctorDuty">
+
+        <TextView
+            android:id="@+id/textView5"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.6"
+            android:text="性别：" />
+
+        <RadioButton
+            android:id="@+id/man"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="男" />
+
+        <RadioButton
+            android:id="@+id/woman"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="女" />
+
+    </RadioGroup>
+
+
+    <Button
+        android:id="@+id/btn_registerRegister"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/shape"
+        android:text="注册"
+        app:layout_constraintBottom_toBottomOf="@+id/btn_back"
+        app:layout_constraintEnd_toStartOf="@+id/guideline"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/btn_back"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/shape"
+        android:text="返回"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.502"
+        app:layout_constraintStart_toStartOf="@+id/guideline"
+        app:layout_constraintTop_toBottomOf="@+id/doctorSex" />
+
+    <android.support.constraint.Guideline
+        android:id="@+id/guideline2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_begin="366dp" />
+
+</android.support.constraint.ConstraintLayout>

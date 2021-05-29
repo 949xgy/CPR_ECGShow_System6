@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="800dp"
+    android:layout_height="match_parent"
+    >
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_gravity="center_horizontal">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="心房扑动参照图"
+            android:textStyle="bold"
+            android:textSize="30sp"/>
+        <ImageView
+            android:layout_width="800dp"
+            android:layout_height="200dp"
+            android:background="@drawable/ecg3_bg"
+            android:scaleType="fitXY"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="30sp"
+            android:text="P波：P波消失，以心房扑动波（F波）代替，常呈连续的锯齿状"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="30sp"
+            android:text="PP间距:通常在250-350 次/分之间"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="30sp"
+            android:text="心房率：通常规则，但存在不同的传导阻滞时可不规则"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="30sp"
+            android:text="QRS波：QRS波时限在0.06-0.10 秒的正常范围内"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="30sp"
+            android:text="RR间距：通常为房率的1/2、1/3、1/4 等，根据房室结的传导状况而定"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="30sp"
+            android:text="心室率：通常规则，但存在不同的传导阻滞时可不规则"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="30sp"
+            android:text="PR间距：房扑P波到R波的间期通常衡定，房室分离时则不同"/>
+        <TextView
+            android:layout_marginTop="20dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="30sp"
+            android:text="病因分析：1.先天性心脏病 2.急性肺栓塞 3.风湿性和高血压性心脏病 4.心肌梗塞 5.心肌病 6.心包病 7.肺部疾病"/>
+        <TextView
+            android:layout_marginTop="20dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="30sp"
+            android:text="治疗相关：伴有室率快或心输出量下降的房扑需要同步电复律或使用地戈辛、异 搏定等抗心律失常药治疗"/>
+    </LinearLayout>
+</ScrollView>

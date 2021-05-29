@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    android:background="@drawable/register_bg">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:text="心肺复苏主界面"
+        android:textSize="50dp"
+        android:textStyle="bold" />
+    <ImageButton
+        android:id="@+id/Image_doctor"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_marginLeft="200dp"
+        android:layout_marginTop="70dp"
+        android:background="@drawable/doctor_bg"
+        android:scaleType="fitXY"
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/Image_doctor"
+        android:text="医生信息"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        android:layout_marginLeft="200dp"/>
+
+    <ImageButton
+        android:id="@+id/Image_patient"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_marginStart="160dp"
+        android:layout_marginTop="70dp"
+        android:layout_toEndOf="@+id/Image_doctor"
+        android:background="@drawable/patient_bg"
+        android:scaleType="fitXY" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/Image_patient"
+        android:text="病人信息"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        android:layout_marginStart="510dp"/>
+
+    <ImageButton
+        android:id="@+id/Image_ECGShow"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_below="@+id/Image_doctor"
+        android:layout_alignStart="@+id/Image_doctor"
+        android:layout_marginTop="50dp"
+        android:background="@drawable/ecgshow_bg"
+        android:scaleType="fitXY"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/Image_ECGShow"
+        android:text="开始监测"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        android:layout_marginStart="200dp"/>
+
+    <ImageButton
+        android:id="@+id/Image_ECGAnalysis"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_below="@id/Image_patient"
+        android:layout_alignLeft="@id/Image_patient"
+        android:layout_marginTop="50dp"
+        android:background="@drawable/ecganalysis_bg"
+        android:scaleType="fitXY"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/Image_ECGAnalysis"
+        android:text="常见心电图"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        android:layout_marginStart="500dp"/>
+
+</RelativeLayout>

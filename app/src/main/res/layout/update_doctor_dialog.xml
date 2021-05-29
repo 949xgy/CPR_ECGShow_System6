@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="match_parent"
+    android:overScrollMode="ifContentScrolls">
+
+
+
+<LinearLayout
+    android:id="@+id/create_user_dialog_view"
+    android:layout_width="fill_parent"
+    android:layout_height="match_parent"
+    android:minWidth="200dp"
+    android:orientation="vertical"
+    android:padding="10dp"
+    android:paddingBottom="30dp"
+    android:paddingTop="30dp"
+
+    >
+
+
+    <EditText
+        android:id="@+id/update_doctorPhone"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:drawableLeft="@drawable/re_phone"
+        android:hint="手机"
+        android:minHeight="45dp"
+        android:textSize="18sp" />
+    <EditText
+        android:id="@+id/update_doctorID"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:drawableLeft="@drawable/re_id"
+        android:hint="身份证"
+        android:minHeight="45dp"
+        android:textSize="18sp" />
+    <EditText
+        android:id="@+id/update_doctorAge"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:drawableLeft="@drawable/re_age"
+        android:hint="年龄"
+        android:minHeight="45dp"
+        android:textSize="18sp" />
+
+    <EditText
+        android:id="@+id/update_doctorDept"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:drawableLeft="@drawable/re_department"
+        android:hint="科室"
+        android:minHeight="45dp"
+        android:textSize="18sp" />
+    <EditText
+        android:id="@+id/update_doctorDuty"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:drawableLeft="@drawable/re_job"
+        android:hint="职务"
+        android:minHeight="45dp"
+        android:textSize="18sp" />
+    <EditText
+        android:id="@+id/update_doctorEmail"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:drawableLeft="@drawable/re_email"
+        android:hint="邮箱"
+        android:minHeight="45dp"
+        android:textSize="18sp" />
+
+</LinearLayout>
+
+</ScrollView>

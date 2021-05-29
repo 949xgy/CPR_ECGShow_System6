@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+android:layout_width="800dp"
+android:layout_height="match_parent"
+    >
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:layout_gravity="center_horizontal">
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="房性早搏参照图"
+        android:textStyle="bold"
+        android:textSize="30sp"/>
+    <ImageView
+        android:layout_width="800dp"
+        android:layout_height="200dp"
+        android:background="@drawable/ecg8_bg"
+        android:scaleType="fitXY"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="30sp"
+        android:text="P波：早搏的P波可能与前一心动的T波融合而不易辨认"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="30sp"
+        android:text="PP间距:通常在60-100次/分之间"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="30sp"
+        android:text="心房率：由于早搏的存在，呈现轻微不规则"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="30sp"
+        android:text="QRS波：QRS波时限在0.06-0.10 秒的正常范围内"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="30sp"
+        android:text="RR间距：通常在60-100次/分之间"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="30sp"
+        android:text="心室率：由于早搏的存在，呈现轻微不规则"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="30sp"
+        android:text="PR间距：早搏的PR间期通常在0.12~0.20秒的正常范围内。如果P波和前一心动的T波融合则测不出"/>
+    <TextView
+        android:layout_marginTop="20dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="30sp"
+        android:text="病因分析：1.过度服用咖啡因、尼古丁、酒精等刺激物 2.过度紧张 3.焦虑 4.心衰 5.慢性肺病 6.电解质紊乱 7.心肌梗塞"/>
+    <TextView
+        android:layout_marginTop="20dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="30sp"
+        android:text="治疗相关：大多数房早不治疗，如患者为频发性房早，可使用地戈辛、异 搏定等抗心律失常药控制异位博动"/>
+</LinearLayout>
+</ScrollView>

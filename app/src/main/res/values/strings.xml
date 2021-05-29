@@ -1,0 +1,46 @@
+<resources>
+    <string name="app_name">心肺复苏心电图显示系统</string>
+    <string name="CPR">CPR状态</string>
+    <string name="CPR_info">CPR标准步骤</string>
+    <string name="Back_n">胸腔回弹正常</string>
+    <string name="Back_a">胸腔回弹异常</string>
+    <string name="Push_dep_b">减少深度</string>
+    <string name="Push_dep_s">加深深度</string>
+    <string name="Push_dep_m">保持深度</string>
+    <string name="Push_freq_b">减缓频率</string>
+    <string name="Push_freq_s">加快频率</string>
+    <string name="Push_freq_m">保持频率</string>
+    <string name="EPI">注射状态(INJ)</string>
+    <string name="EPI_info">EPI步骤及注意事项</string>
+    <string name="SHOCK">电击状态</string>
+    <string name="SHOCK_info">shock操作步骤和注意事项</string>
+    <string name="NULL_Data">----</string>
+    <string name="NORMAL">正常</string>
+    <string name="OVER">过高</string>
+    <string name="LESS">过低</string>
+    <string name="PH_LESS_OPR">PH值过低应该进行的操作</string>
+    <string name="SPO2_LESS_OPR">SpO2过低应该进行的操作</string>
+    <string name="PACO2_LESS_OPR">Paco2过低应该的操作</string>
+    <string name="PAO2_LESS_OPR">pao2过低应该的操作</string>
+    <string name="PH_OVER_OPR">PH值过高应该进行的操作</string>
+    <string name="SPO2_OVER_OPR">SpO2过高应该进行的操作</string>
+    <string name="PACO2_OVER_OPR">Paco2过高应该的操作</string>
+    <string name="PAO2_OVER_OPR">pao2过高应该的操作</string>
+    <string name="BP_OVER_OPR">血压过高应该的操作</string>
+    <string name="BP_LESS_OPR">血压过低应该的操作</string>
+    <string name="title_activity_main2">Main2Activity</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">徐XX</string>
+    <string name="nav_header_subtitle">12346789@qq.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">设置</string>
+
+    <string name="menu_home">主界面</string>
+    <string name="menu_home1">肺复苏心电图显示系统主界面</string>
+    <string name="menu_gallery">个人中心</string>
+    <string name="menu_slideshow">修改密码</string>
+    <string name="menu_quit">退出登录</string>
+
+
+</resources>
