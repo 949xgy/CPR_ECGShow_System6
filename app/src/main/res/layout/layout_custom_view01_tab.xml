@@ -14,7 +14,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:button="@null"
-        android:drawableLeft="@mipmap/ic_launcher"
+        android:drawableLeft="@mipmap/icon_01"
         android:focusable="false"
         android:focusableInTouchMode="false" />
 

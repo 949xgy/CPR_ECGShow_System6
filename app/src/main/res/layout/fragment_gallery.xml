@@ -1,150 +1,307 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ui.gallery.GalleryFragment"
-    android:background="@drawable/bg_1"
+    android:background="#F4F3F8"
+    android:weightSum="100"
+    android:orientation="vertical"
     >
 
-    <TextView
-        android:id="@+id/et_doctorName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="36dp"
-        android:drawableLeft="@drawable/re_user"
-        android:drawablePadding="10dp"
-        android:ems="11"
-
-        android:inputType="textPersonName"
-        android:padding="1dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/et_doctorSex"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-
-        android:layout_marginTop="15dp"
-
-        android:drawableLeft="@drawable/re_sex"
-        android:drawablePadding="10dp"
-
-        android:ems="11"
-        android:inputType="textPersonName"
-        app:layout_constraintEnd_toEndOf="@+id/et_doctorPhone"
-        app:layout_constraintTop_toBottomOf="@+id/et_doctorPhone" />
-
-    <TextView
-        android:id="@+id/et_doctorPhone"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
-        android:drawableLeft="@drawable/re_phone"
-        android:drawablePadding="10dp"
-
-        android:ems="11"
-        android:inputType="phone"
-        app:layout_constraintEnd_toEndOf="@+id/et_doctorName"
-        app:layout_constraintTop_toBottomOf="@+id/et_doctorName" />
-
-    <TextView
-        android:id="@+id/et_doctorID"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:drawableLeft="@drawable/re_id"
-        android:drawablePadding="10dp"
-        android:layout_marginTop="15dp"
-        android:ems="11"
-
-        android:inputType="textPersonName"
-        app:layout_constraintEnd_toEndOf="@+id/et_doctorSex"
-        app:layout_constraintTop_toBottomOf="@+id/et_doctorSex" />
-
-    <TextView
-        android:id="@+id/et_doctorAge"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:drawableLeft="@drawable/re_age"
-        android:drawablePadding="10dp"
-        android:ems="11"
-        android:layout_marginTop="15dp"
-        android:inputType="number"
-        app:layout_constraintEnd_toEndOf="@+id/et_doctorID"
-        app:layout_constraintTop_toBottomOf="@+id/et_doctorID" />
-
-    <TextView
-        android:id="@+id/et_doctorDept"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:drawableLeft="@drawable/re_department"
-        android:drawablePadding="10dp"
-        android:ems="11"
-        android:layout_marginTop="15dp"
-        android:inputType="textPersonName"
-        app:layout_constraintEnd_toEndOf="@+id/et_doctorAge"
-        app:layout_constraintTop_toBottomOf="@+id/et_doctorAge" />
-
-    <TextView
-        android:id="@+id/et_doctorDuty"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:drawableLeft="@drawable/re_job"
-        android:drawablePadding="10dp"
-        android:ems="11"
-        android:layout_marginTop="15dp"
-        android:inputType="textPersonName"
-        app:layout_constraintEnd_toEndOf="@+id/et_doctorDept"
-        app:layout_constraintTop_toBottomOf="@+id/et_doctorDept" />
-
-    <TextView
-        android:id="@+id/et_doctorEmail"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:drawableLeft="@drawable/re_email"
-        android:drawablePadding="10dp"
-        android:ems="11"
-        android:layout_marginTop="15dp"
-        android:inputType="textEmailAddress"
-        app:layout_constraintEnd_toEndOf="@+id/et_doctorDuty"
-        app:layout_constraintTop_toBottomOf="@+id/et_doctorDuty" />
-
-    <android.support.constraint.Guideline
-        android:id="@+id/guideline"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+    <LinearLayout
         android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.5" />
+        android:layout_width="match_parent"
+        android:background="#ffffff"
+        android:layout_weight="30"
+        android:gravity="center_vertical|center_horizontal"
+        android:layout_height="0dp">
+        
+        <ImageView
+            android:src="@drawable/doctor_bg"
+            android:layout_marginBottom="12dp"
+            android:layout_width="50dp"
+            android:layout_height="50dp"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="医生信息"
+            >
+
+        </TextView>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="60"
+        android:orientation="vertical"
+        android:weightSum="80"
+        android:layout_marginBottom="10dp"
+        android:layout_marginTop="10dp"
+        android:background="#ffffff"
+        android:divider="?android:dividerHorizontal"
+        android:showDividers="middle"
+        >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="10"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            >
+            <TextView
+                android:drawableLeft="@drawable/re_user"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="25sp"
+                android:text="姓名"
+                >
+
+            </TextView>
+
+            <TextView
+                android:id="@+id/et_doctorName"
+                android:layout_weight="100"
+                android:layout_width="0dp"
+                android:gravity="center_vertical|center_horizontal"
+                android:text="Doctor"
+                android:textSize="20sp"
+                android:textColor="#000000"
+                android:layout_height="match_parent">
+
+            </TextView>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="10">
+            <TextView
+                android:drawableLeft="@drawable/re_phone"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="25sp"
+                android:text="手机号码"
+                >
+
+            </TextView>
+
+            <TextView
+                android:id="@+id/et_doctorPhone"
+                android:layout_weight="100"
+                android:layout_width="0dp"
+                android:gravity="center_vertical|center_horizontal"
+                android:text="18250991833"
+                android:textSize="20sp"
+                android:textColor="#000000"
+                android:layout_height="match_parent">
+
+            </TextView>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="10">
+            <TextView
+                android:drawableLeft="@drawable/re_sex"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="25sp"
+                android:text="性别"
+                >
+
+            </TextView>
+
+            <TextView
+                android:id="@+id/et_doctorSex"
+                android:layout_weight="100"
+                android:layout_width="0dp"
+                android:gravity="center_vertical|center_horizontal"
+                android:text="男"
+                android:textSize="20sp"
+                android:textColor="#000000"
+                android:layout_height="match_parent">
+
+            </TextView>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="10">
+            <TextView
+                android:drawableLeft="@drawable/re_id"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="25sp"
+                android:text="身份证号"
+                >
+
+            </TextView>
+
+            <TextView
+                android:id="@+id/et_doctorID"
+                android:layout_weight="100"
+                android:layout_width="0dp"
+                android:gravity="center_vertical|center_horizontal"
+                android:text="350781199807522"
+                android:textSize="20sp"
+                android:textColor="#000000"
+                android:layout_height="match_parent">
+
+            </TextView>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="10">
+            <TextView
+                android:drawableLeft="@drawable/re_age"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="25sp"
+                android:text="年龄"
+                >
+
+            </TextView>
+
+            <TextView
+                android:id="@+id/et_doctorAge"
+                android:layout_weight="100"
+                android:layout_width="0dp"
+                android:gravity="center_vertical|center_horizontal"
+                android:text="12"
+                android:textSize="20sp"
+                android:textColor="#000000"
+                android:layout_height="match_parent">
+
+            </TextView>
+        </LinearLayout>
 
 
-    <Button
-        android:id="@+id/btn_update"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@drawable/shape"
-        android:text="修改"
-        app:layout_constraintEnd_toStartOf="@+id/guideline"
-        app:layout_constraintTop_toTopOf="@+id/btn_back" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="10">
+            <TextView
+                android:drawableLeft="@drawable/re_department"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="25sp"
+                android:text="科室"
+                >
 
-    <Button
-        android:id="@+id/btn_back"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@drawable/shape"
-        android:text="返回"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/btn_update"
-        app:layout_constraintTop_toBottomOf="@+id/et_doctorEmail" />
+            </TextView>
 
-    <android.support.constraint.Guideline
-        android:id="@+id/guideline2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_begin="366dp" />
+            <TextView
+                android:id="@+id/et_doctorDept"
+                android:layout_weight="100"
+                android:layout_width="0dp"
+                android:gravity="center_vertical|center_horizontal"
+                android:text="骨科"
+                android:textSize="20sp"
+                android:textColor="#000000"
+                android:layout_height="match_parent">
 
+            </TextView>
+        </LinearLayout>
 
-</android.support.constraint.ConstraintLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="10">
+            <TextView
+                android:drawableLeft="@drawable/re_job"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="25sp"
+                android:text="职称"
+                >
+
+            </TextView>
+
+            <TextView
+                android:id="@+id/et_doctorDuty"
+                android:layout_weight="100"
+                android:layout_width="0dp"
+                android:gravity="center_vertical|center_horizontal"
+                android:text="骨科"
+                android:textSize="20sp"
+                android:textColor="#000000"
+                android:layout_height="match_parent">
+
+            </TextView>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="10">
+            <TextView
+                android:drawableLeft="@drawable/re_email"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="25sp"
+                android:text="邮箱"
+                >
+
+            </TextView>
+
+            <TextView
+                android:id="@+id/et_doctorEmail"
+                android:layout_weight="100"
+                android:layout_width="0dp"
+                android:gravity="center_vertical|center_horizontal"
+                android:text="879897637@qq.com"
+                android:textSize="20sp"
+                android:textColor="#000000"
+                android:layout_height="match_parent">
+
+            </TextView>
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_weight="10"
+        android:background="#ffffff"
+        android:gravity="center_horizontal|center_vertical"
+        android:layout_width="match_parent"
+        android:layout_height="0dp">
+
+        <Button
+            android:id="@+id/btn_update"
+            android:layout_width="150dp"
+            android:layout_marginLeft="20dp"
+            android:layout_height="wrap_content"
+            android:text="修改"
+            >
+
+        </Button>
+
+        <Space
+            android:layout_weight="100"
+            android:layout_width="0dp"
+            android:layout_height="match_parent">
+        </Space>
+
+        <Button
+            android:id="@+id/btn_back"
+            android:text="返回"
+            android:layout_marginRight="20dp"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content">
+
+        </Button>
+
+    </LinearLayout>
+
+</LinearLayout>

@@ -1,5 +1,5 @@
 package com.example.tjw.cpr_ecgshow_system;
-
+import android.graphics.Color;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -7,7 +7,6 @@ import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
-import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.PixelFormat;
 import android.os.Build;
@@ -23,7 +22,6 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
-import android.support.v7.app.ActionBar;
 import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.view.Display;
@@ -34,13 +32,12 @@ import android.view.SurfaceView;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
-import android.view.ViewGroup.LayoutParams;
 import android.widget.Button;
 import android.widget.Chronometer;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
+import android.widget.Switch;
 import android.widget.TextClock;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -50,15 +47,23 @@ import com.example.tjw.cpr_ecgshow_system.EventType.Completeshock;
 import com.example.tjw.cpr_ecgshow_system.EventType.Data_Map;
 import com.example.tjw.cpr_ecgshow_system.ServiceBag.CompleteInjService;
 import com.example.tjw.cpr_ecgshow_system.ServiceBag.CompleteShockService;
-import com.example.tjw.cpr_ecgshow_system.ServiceBag.SendECGService;
 import com.example.tjw.cpr_ecgshow_system.ServiceBag.dataService;
+import com.example.tjw.cpr_ecgshow_system.ServiceBag.httpData;
 import com.example.tjw.cpr_ecgshow_system.ServiceBag.oprationService;
+import com.example.tjw.cpr_ecgshow_system.Thread.ThreadManager;
+import com.example.tjw.cpr_ecgshow_system.Tools.AppGlobalResource;
+import com.example.tjw.cpr_ecgshow_system.Tools.DataProcessingClass;
+
+import com.example.tjw.cpr_ecgshow_system.Tools.Device;
+import com.example.tjw.cpr_ecgshow_system.Tools.HandleWhatFlag;
+import com.example.tjw.cpr_ecgshow_system.Types.ReturnData;
 import com.example.tjw.cpr_ecgshow_system.dataExcption.DataException;
 import com.example.tjw.cpr_ecgshow_system.dataExcption.excptionlist.DataExceptionList;
 import com.example.tjw.cpr_ecgshow_system.fragment.Fragment1;
 import com.example.tjw.cpr_ecgshow_system.fragment.Fragment2;
 import com.example.tjw.cpr_ecgshow_system.fragment.Fragment3;
 import com.example.tjw.cpr_ecgshow_system.fragment.Fragment4;
+import com.example.tjw.cpr_ecgshow_system.interfaces.IServiceReceived;
 import com.example.tjw.cpr_ecgshow_system.statemachine.Test_State_tree;
 import com.example.tjw.cpr_ecgshow_system.utils.CalculatedHeartRate;
 import com.example.tjw.cpr_ecgshow_system.utils.DiseaseJudge;
@@ -66,42 +71,53 @@ import com.example.tjw.cpr_ecgshow_system.utils.DrawECGView;
 import com.example.tjw.cpr_ecgshow_system.utils.MRUtils;
 import com.example.tjw.cpr_ecgshow_system.utils.MyPaint;
 import com.example.tjw.cpr_ecgshow_system.utils.ToastUtils;
+import com.giftedcat.wavelib.utils.WaveUtil;
+import com.giftedcat.wavelib.view.WaveView;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
+import org.json.JSONException;
+import org.junit.Test;
 
 import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.lang.reflect.Type;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
-import java.util.List;
+import java.util.LinkedList;
 import java.util.Map;
-import java.util.Random;
+import java.util.Queue;
 import java.util.Set;
 import java.util.Timer;
 import java.util.TimerTask;
 
-
+/*
+    数据处理与监控主窗口类
+ */
 public class ECGShowActivity extends FragmentActivity implements View.OnClickListener {
-    private Button btn_start,btn_set;
+
+    private Button btn_start,btn_close,btn_set;
     private Button btn_realDraw,btn_pause;//实时绘图按钮
     private Button btn_windowview,btn_choose,btn_patient,btn_ECG;
-    private Context mContext = null;
+    public static Context mContext = null;
     private boolean INJ_TATE = false;
     private boolean isWindowView =false;
     private SurfaceView sfv;
     private DrawECGView drawECGView;
     private Handler msgHandler;
 
+    private Switch switch_ECG;
+
+    Queue<Double> ECG_Data = new LinkedList<Double>();
+    private WaveUtil waveUtil1;
+
+    private WaveView wave_view1;
 
     private Timer mDSTimer;
     private TimerTask mDSTask;
@@ -126,9 +142,12 @@ public class ECGShowActivity extends FragmentActivity implements View.OnClickLis
     private MyPaint myPaint;
     private int time;
 
+    ThreadManager m_threadManager = new ThreadManager();
 
     private TextView tv_CPR;
     private TextView tv_EPI;
+    private Button btn_CPR;
+    private Button btn_EPI;
 
     private RelativeLayout rl_include;
     private RelativeLayout top_layout;
@@ -142,6 +161,8 @@ public class ECGShowActivity extends FragmentActivity implements View.OnClickLis
     private Fragment fragment2;
     private Fragment fragment3;
     private Fragment fragment4;
+
+    httpData http_data =new httpData(); //执行网页类
     /**
      * MAinActivity的参数
      *
@@ -162,6 +183,9 @@ public class ECGShowActivity extends FragmentActivity implements View.OnClickLis
     private int minPushfreq=80,maxPushfreq=100;
     //    计时数据
     private int recLen = 0;
+
+    // 电击能量
+    private String J="120J";
     //    肾上腺素注射间隔时间(标准时间为4分钟)
     final private int TIMEINJ = 1000*40*1;
     //    完成注射和点击操作默认周转的时间长度（标注时间为30s）
@@ -173,7 +197,7 @@ public class ECGShowActivity extends FragmentActivity implements View.OnClickLis
     private WindowManager.LayoutParams layoutParams;
     private View windowview;
     private LayoutInflater factory ;
-    boolean is_show = true;
+    boolean is_show = false;
     private TextView State,pushdep_del,pushfreq_del,springback_del,tip_info;
     private TextView ph_state,ph_opration,spo2_state,spo2_opration,pao2_state,pao2_opration,paco2_state,paco2_opration,bp_state,bp_opration;
     private DataExceptionList ecp_list= new DataExceptionList();
@@ -181,6 +205,7 @@ public class ECGShowActivity extends FragmentActivity implements View.OnClickLis
 
     //    0为正常1为心跳过慢2为心跳过快（心室颤动？）
     private int HREAT_TATE = 0;
+    private int BP2_TATE = 0;
     private int seed = (int) System.currentTimeMillis();
     private Socket socket_hreat = null;
     private ServerSocket serverSocket = null;
@@ -190,7 +215,7 @@ public class ECGShowActivity extends FragmentActivity implements View.OnClickLis
     private Thread thread_hreat = null;
 
     //    随机数
-    private Random random = new Random(seed);
+//    private Random random = new Random(seed);
 
     Handler handler = new Handler();
 
@@ -199,15 +224,14 @@ public class ECGShowActivity extends FragmentActivity implements View.OnClickLis
     Runnable checkhread = new Runnable() {
         @Override
         public void run() {
-            Log.d("HREAT_TATE","+++++++++++++++++++++++++++++++++++"+HREAT_TATE);
+           // Log.d("HREAT_TATE","+++++++++++++++++++++++++++++++++++"+HREAT_TATE);
             if(HREAT_TATE==2){
 //            跳转到shock状态
-                tree.sendMessage(tree.obtainMessage(32));
+                tree.sendMessage(tree.obtainMessage(32));//  32   进行电击状态
             }
-            handler.postDelayed(checkhread,1000);
+            handler.postDelayed(checkhread,1000);           //延时一秒执行
         }
     };
-
 
 
     //开启心率可电击监测（周期为两分钟的循环）
@@ -225,14 +249,14 @@ public class ECGShowActivity extends FragmentActivity implements View.OnClickLis
         @Override
         public void run() {
             if(INJ_TATE){
-                tree.sendMessage(tree.obtainMessage(22));
+                tree.sendMessage(tree.obtainMessage(22));   //此时在电击状态下接受到跳转到注射状态的指令
             }else {
                 handler.postDelayed(sendTrsationToInj,1000);
             }
         }
     };
 
-    //    调用发方法将状态切换到注射状态
+    //    调用该方法将状态切换到注射状态
     Runnable enterinjstate = new Runnable(){
         @Override
         public void run() {
@@ -255,6 +279,7 @@ public class ECGShowActivity extends FragmentActivity implements View.OnClickLis
 
     //    计时
     Runnable runnable = new Runnable(){
+//        openTimercal();                 //1秒 定时器
         @Override
         public void run() {
             recLen++;
@@ -282,6 +307,7 @@ public class ECGShowActivity extends FragmentActivity implements View.OnClickLis
      * 儿童   按压频率：100-120次 深度：4-5cm
      * 婴儿   按压频率：100-120次 深度：3-4cm
      */
+    //成人标准
     private void chose_Adult(){
 //        参数不变化
         minPushDep = 50;
@@ -290,6 +316,7 @@ public class ECGShowActivity extends FragmentActivity implements View.OnClickLis
         maxPushfreq = 100;
         all_data.putData("USER","0");
     }
+    //孕妇标准
     private void chose_Pregnant(){
 //        参数不变化
         minPushDep = 50;
@@ -298,6 +325,7 @@ public class ECGShowActivity extends FragmentActivity implements View.OnClickLis
         maxPushfreq = 100;
         all_data.putData("USER","1");
     }
+    //儿童标准
     private void chose_Child(){
 //        参数变化
         minPushDep = 40;
@@ -307,6 +335,7 @@ public class ECGShowActivity extends FragmentActivity implements View.OnClickLis
         all_data.putData("USER","2");
 
     }
+    //婴儿标准
     private void chose_Baby(){
 //        参数变化
         minPushDep = 30;
@@ -342,6 +371,7 @@ public class ECGShowActivity extends FragmentActivity implements View.OnClickLis
             dealPaO2(Hmap.get("PaO2"));
             dealPaCO2(Hmap.get("PaCO2"));
             dealPH(Hmap.get("PH"));
+
         }
 
     }
@@ -361,8 +391,11 @@ public class ECGShowActivity extends FragmentActivity implements View.OnClickLis
                         serverSocket = new ServerSocket(5556);
                     }
                     while (isCathData){
+
                         client = serverSocket.accept();
                         new Thread(new recivedThread(client)).start();//创建线程
+
+
                     }
                 } catch (IOException e) {
                     e.printStackTrace();
@@ -391,10 +424,17 @@ public class ECGShowActivity extends FragmentActivity implements View.OnClickLis
                 BufferedReader in=new BufferedReader(new InputStreamReader(clinet.getInputStream()));
                 while(isCathData) {
                     String str = in.readLine();
+                       System.out.println("+++_____+++++_____++++____");
+                        System.out.println(str);
+                        System.out.println("+++_____+++++_____++++____");
+
                     Gson gson = new Gson();
                     Type type11 = new TypeToken<HashMap<String, String>>(){}.getType();
                     HashMap gsonmap = gson.fromJson(str, type11);
                     all_data.putAll(gsonmap);
+                    System.out.println("----------------------------");
+                    System.out.println(all_data);
+                    System.out.println("----------------------------");
                     if(all_data.isTrue_Key("ECG")){
                         String ECGstr=all_data.getData("ECG");
                         float a=Float.parseFloat(ECGstr);
@@ -487,7 +527,7 @@ public class ECGShowActivity extends FragmentActivity implements View.OnClickLis
     public void pickHreat(int data){
         ArrayList<Integer> hreat = new ArrayList();
         Log.d("pickhreat+++++++++++++","hreat.length"+hreat.size());
-        if (data>160){
+        if (data>150){
 //            可能为心室颤动
             HREAT_TATE=2;
         }else if(data<55){
@@ -541,18 +581,26 @@ public class ECGShowActivity extends FragmentActivity implements View.OnClickLis
         if(bp1<90){
             putViewData("BP_ST", 1);
             addEcpToList("BP",1,null);
-
         }else if(bp1>90&bp1<140){
             putViewData("BP_ST", 0);
-
         }else{
             putViewData("BP_ST", 2);
             addEcpToList("BP",2,null);
+        }
 
-
+        if(bp2<60){
+            BP2_TATE = 1;           //舒张压 偏低
+        }else if (bp2>90){
+            BP2_TATE = 2;           //舒张压 偏高
+        }else {
+            BP2_TATE = 0;           // 舒张压 正常
         }
 
     }
+
+
+
+
     public void  dealPH(String data) {
         float ph = Float.parseFloat(data);
         if(ph<7.35){
@@ -612,7 +660,6 @@ public class ECGShowActivity extends FragmentActivity implements View.OnClickLis
     private TextClock textClock;
     private TextView tv_start_time;
 
-
     @Override
     protected void onStart() {
         super.onStart();
@@ -622,6 +669,12 @@ public class ECGShowActivity extends FragmentActivity implements View.OnClickLis
 
     }
 
+
+
+
+
+
+//----------------------onCreate()--strat
     @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -632,6 +685,7 @@ public class ECGShowActivity extends FragmentActivity implements View.OnClickLis
         /**
          * MainActivity内部
          */
+
         factory = LayoutInflater.from(ECGShowActivity.this);
         windowview = factory.inflate(R.layout.windowview, null);
         State = windowview.findViewById(R.id.State);
@@ -654,109 +708,144 @@ public class ECGShowActivity extends FragmentActivity implements View.OnClickLis
         btn_windowview = findViewById(R.id.btn_windowview);
         btn_choose = findViewById(R.id.btn_choose);
 
-        intent_data = new Intent(ECGShowActivity.this,dataService.class);
-        intent_opration = new Intent(ECGShowActivity.this,oprationService.class);
-        completeinjection = new Intent(ECGShowActivity.this,CompleteInjService.class);
-        completeshock = new Intent(ECGShowActivity.this,CompleteShockService.class);
+        //---------------------------------心电图画图 模块
+        waveUtil1 = new WaveUtil();
+        wave_view1 = findViewById(R.id.wave_view1);
+        switch_ECG =(Switch) findViewById(R.id.switch1);
+        //---------------------------------心电图画图 模块
+
+        // 启动服务的意图
+        //intent_data = new Intent(ECGShowActivity.this,dataService.class);
+        // 以下全部是随机数生成数据,目的???
+        // intent_opration = new Intent(ECGShowActivity.this,oprationService.class);
+        // completeinjection = new Intent(ECGShowActivity.this,CompleteInjService.class);
+        // completeshock = new Intent(ECGShowActivity.this,CompleteShockService.class);
+
         EventBus.getDefault().register(this);
         btn_choose.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.d("btn_choose","电击事件触发");
+                Log.d("btn_choose","触发事件");
                 showSingleChoiceDialog();
             }
         });
 
-        receiveData();
-        try {
-            Thread.sleep(500);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        tree = Test_State_tree.makeTest_State_tree(this,ECGShowActivity.this);
-        testTree();
+
+//        receiveData();
+//        try {
+//            Thread.sleep(500);
+//        } catch (InterruptedException e) {
+//            e.printStackTrace();
+//        }
 
 
 
 
-//huangcheng
-        initView();
-        initEvent();
-        setFragment(1);
-        initMR();
-        initTL();
 
-        MRUtils.init();
 
-        startFloatingService();
-//huangcheng
+        initView();     //初始化控件
+        initEvent();    //初始化左下角 控件监听事件
+        setFragment(1); //设置Fragment 跳转 初始化 Fragment
+        initMR();       //初始化 右上角 数据 显示字符
+        initTL();       //初始化左边 Treatment List 控件 并监听
+        MRUtils.init(); //初始化 左边数据模块 颜色变幻 警告的条件
+        startFloatingService(); //启动悬浮窗服务
+
 
         //控制读取数据按钮
-        btn_start=findViewById(R.id.btn_start);
-        btn_set=findViewById(R.id.btn_set);
-        btn_start=findViewById(R.id.btn_start);
-//        btn_doctor=findViewById(R.id.btn_doctor);
-//        btn_patient=findViewById(R.id.btn_patient);
-//        btn_ECG=findViewById(R.id.btn_ECG);
 
-        //控制实时绘图按钮
+     //控制实时绘图按钮
         btn_realDraw=findViewById(R.id.btn_realDraw);
         btn_pause=findViewById(R.id.btn_pause);
 
-        sfv= findViewById(R.id.sfv);
-        drawECGView=new DrawECGView(sfv);
+//悬浮框
         btn_windowview.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(isWindowView){
-                    windowManager.removeView(windowview);
-                }else{
-                    windowManager.addView(windowview, layoutParams);
-                }
-                isWindowView=!isWindowView;
-
+//                if(isWindowView){
+//                    //windowManager.removeView(windowview);
+//                }else{
+//                    System.out.println("windowManager is null :"+String.valueOf(windowManager == null));
+//                    //if(windowview != null && layoutParams !=null && windowManager!=null)
+//                    //    windowManager.addView(windowview, layoutParams);
+//                }
+//                isWindowView=!isWindowView;
+                Toast.makeText(ECGShowActivity.this, "悬浮窗口未开发!", Toast.LENGTH_SHORT).show();
             }
         });
 
-//      启动按钮点击事件
-        btn_start.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                start=true;
-            }
-        });
 
-//      实时绘图部分
+        //      实时绘图部分
         btn_realDraw.setOnClickListener(new View.OnClickListener() {
+            @SuppressLint("WrongConstant")
             @Override
             public void onClick(View v) {
-                startService(new Intent(ECGShowActivity.this,SendECGService.class));
 
-                mDSTimer = new Timer();//设置一个定时器，让定时器周期的执行任务
-                mDSTask = new TimerTask(){
-                    public void run(){
-                        Message msg = Message.obtain();
-                        msg.what =0X11;
-                        msgHandler.sendMessage(msg);
-                    }
-                };
-                mDSTimer.schedule(mDSTask,1000,50);
+                if (ECG_bool){
+                    // 心电图 画图
+                    //启动线程,接受数据
+                    m_threadManager.addThread("ECGTHREAD",new Thread(){
+                        @Override
+                        public void run() {
+                            super.run();
+                            while (true){
+                                try {
+                                    Thread.sleep(1000);
+                                } catch (InterruptedException e) {
+                                    break;
+                                }
+                                // 判断当前线程是否被中断
+                                if(Thread.currentThread().isInterrupted()){
+                                    break;
+                                }
+                                // 如果数据队列中的数据被使用完，则再次发起请求!
+                                if(ECG_Data.isEmpty()) {
+                                    // 获取心电传感器数据
+                                    ReturnData data = DataProcessingClass.GetDeviceData(Device.CODE_EcgSensor);
+                                    if (!data.State) {
+                                        continue;
+                                    }
+                                    for (int i = 0; i < data.Data.length(); i++) {
+                                        try {
+                                            double rate = data.Data.getDouble(i);
+                                            ECG_Data.add(rate);
+                                        } catch (JSONException e) {
+                                            throw new RuntimeException(e);
+                                        }
+                                    }
+                                }
+
+                                if(!ECG_Data.isEmpty()){
+                                    // 绘制
+                                    Message msg = new Message();
+                                    msg.obj = ECG_Data.remove();
+                                    msg.what = 123554;// 随便填
+                                    handler_ECG.sendMessage(msg);
+                                }
+
+
+
+                            }
+                        }
+                    });
+                }else {
+                    Toast.makeText(ECGShowActivity.this, "请先打开传感器！！", 1).show();
+                }
+
+
             }
         });
+        //      停止绘图
         btn_pause.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                start=false;
-                stopService(new Intent(ECGShowActivity.this,SendECGService.class));
-                if(mDSTask!=null){
-                    mDSTask.cancel();
-                }
-                if(mDSTimer!=null){
-                    mDSTimer.cancel();
-                }
-
+                m_threadManager.stopThreadByName("ECGTHREAD");
+                waveUtil1.stop();
             }
         });
+
+
+
 
 
         Looper lp = Looper.myLooper();//每个线程只能有一个looper实例
@@ -764,21 +853,61 @@ public class ECGShowActivity extends FragmentActivity implements View.OnClickLis
 
 
 
-        btn_set.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                LeadList.clear();
-                mulCheckDialog();
-            }
-        });
+        myHandler.sendEmptyMessage(2);          //接收socket传过来的值
+        try {
+            Thread.sleep(50);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        myHandler.sendEmptyMessage(0);          //0 控制左边 数据显示的开关
 
-        is_show = true;
-        myHandler.sendEmptyMessage(0);
+
+        //判断传感器是否打开,打开显示左边数据模块
+        Handler D_handler = new Handler();
+        Runnable Device_isChecked = new Runnable() {
+            @Override
+            public void run() {
+                LinearLayout layout_HR = findViewById(R.id.include_HR);
+                Switch  Device_HR   =  (Switch) layout_HR.findViewById(R.id.switch_Device);
+                boolean on_off = Device_HR.isChecked();
+
+                LinearLayout layout_BP = findViewById(R.id.include_BP);
+                Switch  Device_BP   =  (Switch) layout_BP.findViewById(R.id.switch_Device);
+                boolean on_off_BP = Device_BP.isChecked();
+
+                LinearLayout layout_T = findViewById(R.id.include_T);
+                Switch  Device_T   =  (Switch) layout_T.findViewById(R.id.switch_Device);
+                boolean on_off_T = Device_T.isChecked();
+
+
+                if(on_off || on_off_BP || on_off_T){
+                    is_show = true;         // 打开数据实时显示
+
+                }else {
+                    is_show = false;        //关闭数据实时显示
+
+                }
+                D_handler.postDelayed(this,1000);           //延时一秒执行
+            }
+        };
+        Device_isChecked.run();
+
+
+
 //        myHandler.sendEmptyMessage(4);
         myHandler.sendEmptyMessageDelayed(1, 2000);
-        myHandler.sendEmptyMessageDelayed(2, 3000);
+
+
+        tree = Test_State_tree.makeTest_State_tree(this,ECGShowActivity.this);
+        testTree();
+
+
+
 
     }
+//----------------------onCreate()--end
+
+
 
     //    启动悬浮窗方法
     @RequiresApi(api = Build.VERSION_CODES.M)
@@ -806,44 +935,70 @@ public class ECGShowActivity extends FragmentActivity implements View.OnClickLis
             iv_canvas.setImageBitmap(baseBitmap);
         }
         myPaint.drawBaseLine(canvas,paint);
-        myPaint.drawCPR(canvas,paint,0);
+        myPaint.drawCPR(canvas,paint,20,0);
     }
+
+
     private void VF() {
         myHandler.sendEmptyMessage(3);
     }
+
+
+
+private void initSet(){
+    workflow_step1.setBackgroundResource(R.drawable.tv_workflow_step);
+    workflow_step2.setBackgroundResource(R.drawable.tv_workflow_step);
+    workflow_step3.setBackgroundResource(R.drawable.tv_workflow_step3);
+    workflow_step4.setBackgroundResource(R.drawable.tv_workflow_step3);
+}
+
+    //右边 流程图 红框的变化------------------------------Strat
     @SuppressLint("SetTextI18n")
     private int startVF(){
-        time = (int)(Math.random()*120+1);
+        // return time: log 时间轴上VF 显示的地方
+        initSet();//初始化全为 未选中的样子
+        time = recLen;
         int min = time/60;
         int sec = time%60;
-        Log.i("yimt",time+":"+min+":"+sec);
-        workflow_step1.setText("0"+min+":"+ (sec<10?"0"+sec:sec)+" Started:VF");
+        Log.i("yimt", (String) textClock.getText().subSequence(11,19));
+        workflow_step1.setText("0"+min+":"+(sec<10?"0"+sec:sec)+" Started:VF");
         workflow_step1.setBackgroundResource(R.drawable.layout_shock);
         return time;
     }
+    @SuppressLint({"WrongConstant", "ShowToast"})
     private void startShockDone(){
-        workflow_step1.setBackgroundResource(R.drawable.tv_workflow_step);
+        initSet();//初始化全为 未选中的样子
+        Toast.makeText(ECGShowActivity.this, "开始电击除颤操作!", 1).show();
         workflow_step2.setBackgroundResource(R.drawable.layout_shock);
 
     }
+    @SuppressLint({"WrongConstant", "ShowToast"})
     private void startCPR() {
-        workflow_step2.setBackgroundResource(R.drawable.tv_workflow_step);
+        initSet();//初始化全为 未选中的样子
+        Toast.makeText(ECGShowActivity.this, "开始CPR操作!", 1).show();
         workflow_step3.setBackgroundResource(R.drawable.layout_epi);
     }
 
+    @SuppressLint({"WrongConstant", "ShowToast"})
     private void startEPI() {
-
-        workflow_step3.setBackgroundResource(R.drawable.tv_workflow_step3);
+        initSet();//初始化全为 未选中的样子
+        Toast.makeText(ECGShowActivity.this, "开始EPI注射操作!", 1).show();
         workflow_step4  .setBackgroundResource(R.drawable.layout_epi);
     }
+    @SuppressLint({"WrongConstant", "ShowToast"})
     private void startCheckRhythm() {
-        workflow_step4.setBackgroundResource(R.drawable.tv_workflow_step3);
-        workflow_step5  .setBackgroundResource(R.drawable.layout_epi);
+        initSet();//初始化全为 未选中的样子
+        Toast.makeText(ECGShowActivity.this, "结束操作!", 1).show();
+        workflow_step5.setBackgroundResource(R.drawable.layout_epi);
     }
+
+    //右边 流程图 红框的变化------------------------------end
+
     /**
      * MainActivity内部
      *
      */
+//    悬浮框----------------------------start
     @SuppressLint("ResourceAsColor")
     public void showWindowView(HashMap map){
         Map<String, Integer> Hmap = map;
@@ -1062,9 +1217,21 @@ public class ECGShowActivity extends FragmentActivity implements View.OnClickLis
         }
 //        State.setText("showWindowView");
     }
+//    悬浮框----------------------------end
+
+//右边流程图的跳转------------------start
     @SuppressLint("HandlerLeak")
     Handler myHandler = new Handler() {
-        int count = 0;
+        int count = 0;              //计时的
+        int time_log = 0;           //日志 时间
+        int start_time = 0;         //画图 开始时间
+        int shocks_num = 0;         //电击次数
+        int CPR_num = 0;          //CPR的次数
+        int EPI_num = 0;          //EPI次数
+        int draw_time = 0;
+        int EPI_start_time = 0;
+        int EPI_end_time = 0;
+        @SuppressLint({"WrongConstant", "ShowToast"})
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
             switch (msg.what){
@@ -1073,83 +1240,188 @@ public class ECGShowActivity extends FragmentActivity implements View.OnClickLis
                         HashMap<String, String> hashMap = all_data.getMap();
                         Log.i("map", hashMap + "");
                         setMRvalue(hashMap);
+                        setTLvalue(hashMap);
                         showWindowView(viewmap);
-                        myHandler.sendEmptyMessageDelayed(0, 1000);
+                        Log.d("is_show","进来了"+is_show);
                     }
+                    myHandler.sendEmptyMessageDelayed(0, 1000);
                 } break;
                 case 1:{
-                    setStartTime();
+                    setStartTime();         // 进入系统的开始时间
                 } break;
                 case 2: {
-//                    receiveData();
+                    receiveData();
                 } break;
                 case 3:{
-                    int time = startVF();
-                    System.out.println("A : "+canvas);
-                    System.out.println("B : "+paint);
-                    myPaint.drawVF(canvas, paint, time);
-                    myHandler.sendEmptyMessageDelayed(4,5000);
+                    int time = startVF();           //右边红框 框住Started:VF
+                    myPaint.drawVF(canvas, paint, time);  //日志轴上画VF
+                    myHandler.sendEmptyMessageDelayed(4,10000); //10秒后 第一次电击
                 } break;
                 case 4:{
-//                    showWindowView(viewmap);
-//                    myHandler.sendEmptyMessageDelayed(4, 10);
-                    time += (int)(Math.random()*60 + 30);
-                    Log.i("Time",":" + time);
+                    shocks_num++;           //电击次数加一
+                    switch(shocks_num){
+                        case 1:
+                            J = "120J";             //第一次电击能量
+                            break;
+                        case 2:
+                            J = "250J";             //第二次电击能量
+                            break;
+                        case 3:
+                            J = "360J";             //第三次电击能量
+                            break;
+                        default:break;
+                    }
+                    Log.i("Time",":" + recLen);
                     startShockDone();
-                    myPaint.drawShock(canvas, paint, time);
+                    myPaint.drawShock(canvas, paint, recLen,J,shocks_num);       //日志轴上画 电击图标 120J 能量+次数
                     myHandler.sendEmptyMessageDelayed(5,10000);
                 }break;
-                case 5:{
-                    if (count == 0) {
-                        startCPR();
-                    }
-                    if (++count > 2400) {
-                        int time = (count * 50) / 1000;
-                        int min = time / 60;
-                        int sec = time % 60;
-                        String text = "CPR(1) " + String.format("%02d:%02d", min, sec);
-                        myPaint.drawCPRText(canvas,paint,text);
-                        count = 0;
-                        myHandler.sendEmptyMessage(6);
-                    } else {
-                        myHandler.sendEmptyMessageDelayed(5, 50);
-                        myPaint.drawCPR(canvas,paint,(float)(count*0.05*3.5));
-                        int time = (count * 50) / 1000;
-                        int min = time / 60;
-                        int sec = time % 60;
-                        tv_CPR.setText(String.format("%02d:%02d Elasped", min, sec));
-                    }
-                }break;
-                case 6:{
-                    if (count == 0) {
-                        startEPI();
-                    }
-                    if (++count > 3600) {
-                        int time = (count * 50) / 1000;
-                        int min = time / 60;
-                        int sec = time % 60;
-                        String text = "EPI(1) " + String.format("%02d:%02d", min, sec);
-                        myPaint.drawEPIText(canvas,paint,text);
-                        count = 0;
-                        myHandler.sendEmptyMessage(7);
-                    } else {
-                        myHandler.sendEmptyMessageDelayed(6,50);
-                        myPaint.drawEPI(canvas,paint,(float)(count*0.05*3.5));
 
-                        int time = (count * 50) / 1000;
-                        int min = time / 60;
-                        int sec = time % 60;
-                        tv_EPI.setText(String.format("%02d:%02d Elasped", min, sec));
+                case 5:{        //5 进入CPR 状态
+                        CPR_num++;          //CPR次数
+                        count = 0;              //计时50ms一次  跑2400次 =120s
+                    Runnable draw_CPR = new Runnable(){
+                        @Override
+                        public void run() {
+                            if(count==0){
+                                start_time = recLen;    //画图的初始位置
+                                startCPR();
+                                btn_CPR.setText("CPR("+CPR_num+")");
+                            }
+                            count++;
+                            int time = (count * 50) / 1000;
+                            int min = time / 60;
+                            int sec = time % 60;
+                            myPaint.drawCPR(canvas,paint,(float)(start_time*3.5),(float)(count*0.05*3.5));//画图
+                            tv_CPR.setText(String.format("%02d:%02d Elasped", min, sec));       ///CPR计时
+                            if(count<=2400){
+                                handler.postDelayed(this, 50);          //50ms循环一次
+                            }else {
+                                count = 0;
+                                switch (CPR_num){
+                                    case 1:             //第一次CPR
+                                            myHandler.sendEmptyMessage(4);//跳回电击环节
+                                        break;
+                                    case 2:             //第二次CPR   完成后 不进行判断 直接注射环节
+                                    case 3:             //第三次CPR   完成后 判断条件
+                                        if(BP2_TATE==0&&HREAT_TATE==0){        //舒张压  0:正常60-90  1: 低于<60  2:高于>90  //心率   0:正常 55-150   1: <55  2: >150
+                                            myHandler.sendEmptyMessage(7); //跳入结束
+                                        }else {
+                                            myHandler.sendEmptyMessage(6);  //下一步进入 注射环节
+                                        }
+                                        break;
+                                    //舒张压  0:正常60-90  1: 低于<60  2:高于>90  心率   0:正常 55-150   1: <55  2: >150
+                                }
+                                String text = String.format("CPR(%d) ", CPR_num) + String.format("%02d:%02d", 2, 0);
+                                myPaint.drawCPRText(canvas,paint,text,(float) (start_time*3.5));
+                            }
+                        }
+                    };
+                    handler.postDelayed(draw_CPR,1);
+                }break;
+
+                case 6:{        //6 设置EPI状态
+                    EPI_num ++;         //EPI次数
+                    start_time = recLen;        //开始时间
+                    Runnable draw_EPI = new Runnable(){          //画图
+                        @Override
+                        public void run() {
+                            if(count==0){
+                                start_time = recLen;        //开始时间
+                                startEPI();     //设置EPI状态
+                                btn_EPI.setText("EPI("+EPI_num+")");
+                            }
+                            count++;
+                            int time = (count * 50) / 1000;
+                            int min = time / 60;
+                            int sec = time % 60;
+                            myPaint.drawEPI(canvas,paint,(float)(start_time*3.5),(float)(count*0.05*3.5));//画图
+                            tv_EPI.setText(String.format("%02d:%02d Elasped", min, sec));       ///CPR计时
+                            if(count<=400){
+                                handler.postDelayed(this, 50);          //50ms循环一次  ==20s
+                            }else {
+                                EPI_end_time = recLen;      //结束时间
+                                String text = String.format("EPI(%d) ", EPI_num);
+                                myPaint.drawEPIText(canvas,paint,text,(float) (start_time*3.5));
+                                count = 0;
+                                if (EPI_num==2){            //判断是否为最后一次
+                                    new Thread(){
+                                        @Override
+                                        public void run() {
+                                            count = 0;
+                                            int t = 20;
+                                            while (t>0){
+                                                t--;
+                                                myPaint.drawObserve(canvas, paint, EPI_end_time,t);
+                                                try {
+                                                    Thread.sleep(1000);
+                                                } catch (InterruptedException e) {
+                                                    e.printStackTrace();
+                                                }
+                                            }
+                                            myHandler.sendEmptyMessage(7);  //完成
+                                        }
+                                    }.start();
+
+                                }else {
+                                    if (HREAT_TATE==0) {    //心率   0:正常 55-150   1: <55  2: >150
+                                        if (BP2_TATE==0){          //舒张压  0:正常60-90  1: 低于<60  2:高于>90
+                                            myHandler.sendEmptyMessage(7);  //完成
+                                        }else {
+                                            myHandler.sendEmptyMessage(5);  //CPR
+                                        }
+                                    }else {
+                                        myHandler.sendEmptyMessage(4);      //电击
+                                    }
+                                }
+
+                            }
+                        }
+                    };
+                    if(EPI_num==1){     //第一次 不需要考虑时间间隔
+                        count = 0;
+                        handler.postDelayed(draw_EPI,1);   //画图
+                    }else if (EPI_num==2){ //不是第一次
+
+                        if ((start_time-EPI_end_time)>200){ //间隔在3-5min之间  EPI_end_time:上一次 结束时间
+                            count = 0;
+                            handler.postDelayed(draw_EPI,1);   //画图
+                        }else {
+                            count =0;
+                            int t = 200-(start_time-EPI_end_time);
+                            Toast.makeText(ECGShowActivity.this, String.format("EPI注射间隔过短,观察%d后操作! ", t), 1).show();
+                            new Thread(){
+                                @Override
+                                public void run() {
+                                    count = 0;
+                                    int t = 200-(start_time-EPI_end_time);
+                                    while (t>0){
+                                        t--;
+                                        myPaint.drawObserve(canvas, paint, start_time,t);
+                                        try {
+                                            Thread.sleep(1000);
+                                        } catch (InterruptedException e) {
+                                            e.printStackTrace();
+                                        }
+                                    }
+
+                                }
+                            }.start();
+                            count = 0;
+                            handler.postDelayed(draw_EPI,(200-(start_time-EPI_end_time))*1000);   //画图 这么多ms时间后 开始EPI操作
+                        }
                     }
 
                 }break;
+
                 case 7:{
-                    startCheckRhythm();
+                    myPaint.drawEnd(canvas, paint, recLen);
+                    startCheckRhythm();         //7  结束状态
 
                 }break;
                 case 10: {
-                    initPaint();
-                    VF();
+                    initPaint();            // 初始化 画板 日志轴的图
+//                    VF();                   // 设置VF 状态
                 } break;
                 default:break;
             }
@@ -1157,10 +1429,17 @@ public class ECGShowActivity extends FragmentActivity implements View.OnClickLis
         }
     };
 
+//右边流程图的跳转------------------end
+
+
     private void setStartTime() {
         textClock.getText();
+        System.out.println(textClock.getText()+"+++++++++>>>>>>>>>>>>>>>>>>>");
         tv_start_time.setText(textClock.getText().subSequence(11,19));
     }
+
+
+//设置左边数据显示 模块----------------------start
     private void setMRvalue(HashMap hashMap){
 
         Set<Map.Entry<String, String>> entrySet = hashMap.entrySet();
@@ -1178,9 +1457,9 @@ public class ECGShowActivity extends FragmentActivity implements View.OnClickLis
                     String[] s = value.split("/");
                     int a = Integer.valueOf(s[0]);
                     int b = Integer.valueOf(s[1]);
-                    if ((a > 100 && a < 120) && (b > 60 && b < 80)) {
+                    if ((a >= 90 && a < 140) && (b >= 60 && b < 90)) {
                         ll.setBackgroundColor(Color.WHITE);
-                    } else if (((a > 70 && a < 100) || (a > 120 && a < 150)) && ((b > 40 && b < 60) || (b > 80 && b < 100))) {
+                    } else if (((a > 70 && a < 90) || (a > 140 && a < 150)) && ((b > 40 && b < 60) || (b > 80 && b < 100))) {
                         ll.setBackgroundColor(Color.YELLOW);
                     } else {
                         ll.setBackgroundColor(Color.RED);
@@ -1191,45 +1470,230 @@ public class ECGShowActivity extends FragmentActivity implements View.OnClickLis
             }
         }
     }
+//设置左边数据显示 模块----------------------end
 
-    private void initMR() {
+
+
+
+//设置左边 中间  显示 模块----------------------start
+    private void setTLvalue(HashMap hashMap){
+
+        Set<Map.Entry<String, String>> entrySet = hashMap.entrySet();
+
+        for (Map.Entry<String, String> entry : entrySet) {
+            String key = entry.getKey();
+            String value = entry.getValue();    
+            Integer re_id = MRUtils.getId_hashMap().get(key);
+//
+            if (re_id != null) {
+                Log.i("key", "key : " +  key + " - value : " + value);
+                TextView l1 = findViewById(R.id.id_TL_tv1);
+                TextView l2 = findViewById(R.id.id_TL_tv2);
+                TextView l3 = findViewById(R.id.id_TL_tv3);
+                TextView l4 = findViewById(R.id.id_TL_tv4);
+                TextView l5 = findViewById(R.id.id_TL_tv5);
+                TextView l6 = findViewById(R.id.id_TL_tv6);
+                TextView l7 = findViewById(R.id.id_TL_tv7);
+                TextView l8 = findViewById(R.id.id_TL_tv8);
+                if (key.equals("HR")) {
+                    l1.setBackgroundColor(MRUtils.get_color(key, Double.valueOf(value)));
+                    l2.setBackgroundColor(MRUtils.get_color(key, Double.valueOf(value)));
+
+                    l8.setBackgroundColor(MRUtils.get_color(key, Double.valueOf(value)));
+                }
+
+                if (key.equals("PH")){
+                    l5.setBackgroundColor(MRUtils.get_color(key, Double.valueOf(value)));
+                }
+
+
+            }
+            
+//
+        }
+    }
+//设置左边数据显示 模块----------------------end
+
+
+
+
+
+
+
+// 打开/关闭 传感器的线程------------start
+    private void Thread_http (String Url){
+        new Thread(){
+            @Override
+            public void run() {
+                //执行心电传感器 开的网络接口
+                int value =http_data.getData(Url);
+                //DataProcessingClass.OpenDevice(Dec)
+                //handler_ECG.sendEmptyMessage(value);
+            }
+        }.start();
+    }
+// 打开/关闭 传感器的线程------------end
+
+
+//初始化左边界面显示的相应字符,并监听传感器的开关状态-------------start
+    public void initMR() {
+
+        //设置界面上的相应字符
 //        LinearLayout layout_HR = findViewById(R.id.include_HR);
+        LinearLayout layout_HR = findViewById(R.id.include_HR);
+        TextView tv_HR_title = layout_HR.findViewById(R.id.tv_title);
+        Switch  Device_HR   =  (Switch) layout_HR.findViewById(R.id.switch_Device);
+        tv_HR_title.setText("HR");
+
+
         LinearLayout layout_RR = findViewById(R.id.include_RR);
         TextView tv_RR_title = layout_RR.findViewById(R.id.tv_title);
+        Switch  Device_RR   =  (Switch) layout_RR.findViewById(R.id.switch_Device);
+//        Device_RR.setVisibility(0);
         tv_RR_title.setText("RR");
 
         LinearLayout layout_BP = findViewById(R.id.include_BP);
         TextView tv_BP_title = layout_BP.findViewById(R.id.tv_title);
+        Switch  Device_BP   =  (Switch) layout_BP.findViewById(R.id.switch_Device);
         tv_BP_title.setText("BP");
+
 
         LinearLayout layout_SPO2 = findViewById(R.id.include_SPO2);
         TextView tv_SPO2_title = layout_SPO2.findViewById(R.id.tv_title);
-        tv_SPO2_title.setText("SPO2");
+        Switch  Device_SPO2   =  (Switch) layout_SPO2.findViewById(R.id.switch_Device);
+        tv_SPO2_title.setText("SPO2(%)");
 
         LinearLayout layout_PH = findViewById(R.id.include_PH);
         TextView tv_PH_title = layout_PH.findViewById(R.id.tv_title);
+        Switch  Device_PH   =  (Switch) layout_PH.findViewById(R.id.switch_Device);
         tv_PH_title.setText("PH");
 
         LinearLayout layout_PaO2 = findViewById(R.id.include_PaO2);
         TextView tv_PaO2_title = layout_PaO2.findViewById(R.id.tv_title);
+        Switch  Device_PaO2   =  (Switch) layout_PaO2.findViewById(R.id.switch_Device);
         tv_PaO2_title.setText("PaO2");
 
         LinearLayout layout_PaCO2 = findViewById(R.id.include_PaCO2);
         TextView tv_PaCO2_title = layout_PaCO2.findViewById(R.id.tv_title);
+        Switch  Device_PaCO2   =  (Switch) layout_PaCO2.findViewById(R.id.switch_Device);
         tv_PaCO2_title.setText("PaCO2");
 
         LinearLayout layout_Mg = findViewById(R.id.include_Mg);
         TextView tv_Mg_title = layout_Mg.findViewById(R.id.tv_title);
+        Switch  Device_Mg   =  (Switch) layout_Mg.findViewById(R.id.switch_Device);
         tv_Mg_title.setText("Mg");
 
-        LinearLayout layout_K = findViewById(R.id.include_K);
-        TextView tv_K_title = layout_K.findViewById(R.id.tv_title);
-        tv_K_title.setText("K+");
+//        LinearLayout layout_K = findViewById(R.id.include_K);
+//        TextView tv_K_title = layout_K.findViewById(R.id.tv_title);
+//        tv_K_title.setText("K+");
+
+        LinearLayout layout_T = findViewById(R.id.include_T);
+        TextView tv_T_title = layout_T.findViewById(R.id.tv_title);
+        Switch  Device_T   =  (Switch) layout_T.findViewById(R.id.switch_Device);
+        tv_T_title.setText("T");
 
         LinearLayout layout_Creat = findViewById(R.id.include_Creat);
         TextView tv_Creat_title = layout_Creat.findViewById(R.id.tv_title);
+        Switch  Device_Creat   =  (Switch) layout_Creat.findViewById(R.id.switch_Device);
         tv_Creat_title.setText("Creat");
+
+
+
+        //控制左边模块 驱动的开关
+        //HR 传感器
+        Device_HR.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                boolean isChecked = Device_HR.isChecked();
+                if (isChecked == true) {
+                    Device_SPO2.setChecked(true);
+                    Device_PaO2.setChecked(true);
+                    //
+                    Thread_http("http://"+ AppGlobalResource.IP+":"+AppGlobalResource.PORT+"/open_device/2&0.2");
+
+                    openTimercal();             // 传感器打开 就开始计时
+                    VF();                       //传感器打开 VF开启
+
+
+                } else {
+                    Device_SPO2.setChecked(false);
+                    Device_PaO2.setChecked(false);
+                    Thread_http("http://"+AppGlobalResource.IP+":"+AppGlobalResource.PORT+"/close_device/2");
+                    initPaint();
+
+                }
+            }
+        });
+        //BP 传感器
+        Device_BP.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                boolean isChecked = Device_BP.isChecked();
+                if (isChecked == true) {
+                    Thread_http("http://"+AppGlobalResource.IP+":"+AppGlobalResource.PORT+"/open_device/4&0.2");
+                } else {
+                    Thread_http("http://"+AppGlobalResource.IP+":"+AppGlobalResource.PORT+"/close_device/4");
+                }
+            }
+        });
+        //SPO2 传感器
+        Device_SPO2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                boolean isChecked = Device_SPO2.isChecked();
+                if (isChecked == true) {
+                    Device_HR.setChecked(true);
+                    Device_PaO2.setChecked(true);
+                    Thread_http("http://"+AppGlobalResource.IP+":"+AppGlobalResource.PORT+"/open_device/2&0.2");
+
+                    openTimercal();             // 传感器打开 就开始计时
+                    VF();                       //传感器打开 VF开启
+                } else {
+                    Device_HR.setChecked(false);
+                    Device_PaO2.setChecked(false);
+                    Thread_http("http://"+AppGlobalResource.IP+":"+AppGlobalResource.PORT+"/close_device/2");
+                }
+            }
+        });
+        //PaO2 传感器
+        Device_PaO2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                boolean isChecked = Device_PaO2.isChecked();
+                if (isChecked == true) {
+                    Device_HR.setChecked(true);
+                    Device_SPO2.setChecked(true);
+                    Thread_http("http://"+AppGlobalResource.IP+":"+AppGlobalResource.PORT+"/open_device/2&0.2");
+
+                    openTimercal();             // 传感器打开 就开始计时
+                    VF();                       //传感器打开 VF开启
+                } else {
+                    Device_HR.setChecked(false);
+                    Device_SPO2.setChecked(false);
+                    Thread_http("http://"+AppGlobalResource.IP+":"+AppGlobalResource.PORT+"/close_device/2");
+                }
+            }
+        });
+        //T 温度传感器
+        Device_T.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                boolean isChecked = Device_T.isChecked();
+                if (isChecked == true) {
+                    Thread_http("http://"+AppGlobalResource.IP+":"+AppGlobalResource.PORT+"/open_device/1&0.2");
+                } else {
+                    Thread_http("http://"+AppGlobalResource.IP+":"+AppGlobalResource.PORT+"/close_device/1");
+                }
+            }
+        });
+
     }
+
+//初始化左边界面显示的相应字符,并监听传感器的开关状态-------------end
+
+
+
+
 
     void testTree(){
         tree.sendMessage(tree.obtainMessage(2));
@@ -1271,7 +1735,7 @@ public class ECGShowActivity extends FragmentActivity implements View.OnClickLis
 
         //发送cpr消息
         //跳转回cpr状态操作
-        //        tree.deferMessage(tree.obtainMessage(012));
+                tree.deferMessage(tree.obtainMessage(012));
         //        tree.transitionTo(tree.getC1());
     }
     //    关闭实时心率可电击状态监测
@@ -1282,7 +1746,7 @@ public class ECGShowActivity extends FragmentActivity implements View.OnClickLis
 
 
     public void tipShock(){
-//        由状态数调用的shoc方法，可以在此执行界面上的变化，以提示其进行相应的操作
+//        由状态数调用的shock方法，可以在此执行界面上的变化，以提示其进行相应的操作
         Log.d("MainActivity","由状态树调用，执行提示进行AED电击操作");
 //        此处执行具体的电击操作：
 //        判断电击能量
@@ -1366,29 +1830,28 @@ public class ECGShowActivity extends FragmentActivity implements View.OnClickLis
      * 计时方法：建议移除
      */
     public void openTimercal(){
+        recLen = 0;
         handler.postDelayed(runnable, 1000);
     }
-
+    // 启动所有服务
     public void startAllService(){
 //        从State调用该方法启动服务
         Log.d("MainActivity","从state里调用开始所有数据随机服务");
-        startService(intent_data);
-        startService(intent_opration);
-
-//
-
+        //startService(intent_data);
+        //startService(intent_opration);
 //        启动间隔为1s的定时器
-        openTimercal();
-        openHreadshockable();
-        startenterinj();
+//        openTimercal();                 //1秒 定时器
+        openHreadshockable();        //开启 循环电击可检测
+        startenterinj();            //开启肾上腺素    持续性发送跳转状态到注射状态的方法
     }
 
 
     //    停止所有外部数据服务
     public void stopAllService(){
         Log.d("MainActivity","从state里调用停止所有数据随机服务");
-        stopService(intent_data);
-        stopService(intent_opration);
+        if(intent_data!=null)
+            stopService(intent_data);
+        //stopService(intent_opration);
 //        停止该定时器
         stopenterinj();
         handler.removeCallbacks(trasctionToCprState);
@@ -1405,13 +1868,13 @@ public class ECGShowActivity extends FragmentActivity implements View.OnClickLis
     //    进入注射状态时需要开启的服务
     public void openCompeleteinj(){
         INJ_TATE = false;
-        startService(completeinjection);
+        //startService(completeinjection);
     }
 
 
     //    离开注射状态后需要关闭的服务
     public void closeCompleteinj(){
-        stopService(completeinjection);
+        //stopService(completeinjection);
     }
 
 
@@ -1419,7 +1882,7 @@ public class ECGShowActivity extends FragmentActivity implements View.OnClickLis
 
     //    开启肾上腺素定时器
     public void startenterinj(){
-        handler.postDelayed(enterinjstate, TIMEINJ);
+        //handler.postDelayed(enterinjstate, TIMEINJ);
     }
 
 
@@ -1524,7 +1987,7 @@ public class ECGShowActivity extends FragmentActivity implements View.OnClickLis
         builder.show();
     }
 
-    // 更新UI画图的线程
+    // 更新UI画图的线程--------start-----可删除
     class MsgHandler extends Handler {
         public MsgHandler(Looper looper) {
             super(looper);
@@ -1605,9 +2068,12 @@ public class ECGShowActivity extends FragmentActivity implements View.OnClickLis
             }
         }
     }
-    //huangcheng
+    // 更新UI画图的线程--------end-------可删除
+
+
+    //初始化控件
     private void initTL() {
-        TextView TL_tv1 = findViewById(R.id.id_TL_tv1);
+        TextView TL_tv1 = findViewById(R.id.id_TL_tv1);//左边 Treatment List 模块的 8个
         TextView TL_tv2 = findViewById(R.id.id_TL_tv2);
         TextView TL_tv3 = findViewById(R.id.id_TL_tv3);
         TextView TL_tv4 = findViewById(R.id.id_TL_tv4);
@@ -1637,13 +2103,15 @@ public class ECGShowActivity extends FragmentActivity implements View.OnClickLis
     }
 
     private void initView() {
-        tv1 = findViewById(R.id.id_tv_fragment1);
+        tv1 = findViewById(R.id.id_tv_fragment1);   //左下角 模块 的四个文本框
         tv2 = findViewById(R.id.id_tv_fragment2);
         tv3 = findViewById(R.id.id_tv_fragment3);
         tv4 = findViewById(R.id.id_tv_fragment4);
 
         tv_CPR = findViewById(R.id.id_CPR_tv);
+        btn_CPR = findViewById(R.id.id_btn_CPR);
         tv_EPI = findViewById(R.id.id_EPI_tv);
+        btn_EPI = findViewById(R.id.id_btn_EPI);
 
         textClock = findViewById(R.id.id_tv_TimeClock);
         tv_start_time = findViewById(R.id.id_tv_starttime);
@@ -1658,57 +2126,33 @@ public class ECGShowActivity extends FragmentActivity implements View.OnClickLis
         iv_canvas = findViewById(R.id.iv_canvas);
 
         top_layout = findViewById(R.id.id_top_layout);
+
+
+
     }
 
     private void setFragment(int i) {
         FragmentManager fm = getSupportFragmentManager();
+
         FragmentTransaction transaction = fm.beginTransaction();
         hideFragment(transaction);
         switch (i)
         {
             case 1:
-                if (fragment1 == null)
-                {
                     fragment1 = new Fragment1();
-                    transaction.add(R.id.id_fragment,fragment1);
-                }
-                else
-                {
-                    transaction.show(fragment1);
-                }
+                    transaction.replace(R.id.id_fragment,fragment1);
                 break;
             case 2:
-                if (fragment2 == null)
-                {
                     fragment2 = new Fragment2();
-                    transaction.add(R.id.id_fragment, fragment2);
-                }
-                else
-                {
-                    transaction.show(fragment2);
-                }
+                    transaction.replace(R.id.id_fragment, fragment2);
                 break;
             case 3:
-                if (fragment3 == null)
-                {
                     fragment3 = new Fragment3();
-                    transaction.add(R.id.id_fragment, fragment3);
-                }
-                else
-                {
-                    transaction.show(fragment3);
-                }
+                    transaction.replace(R.id.id_fragment, fragment3);
                 break;
             case 4:
-                if (fragment4 == null)
-                {
                     fragment4 = new Fragment4();
-                    transaction.add(R.id.id_fragment, fragment4);
-                }
-                else
-                {
-                    transaction.show(fragment4);
-                }
+                    transaction.replace(R.id.id_fragment, fragment4);
                 break;
             default:
                 break;
@@ -1755,6 +2199,11 @@ public class ECGShowActivity extends FragmentActivity implements View.OnClickLis
                 break;
 
             case R.id.id_TL_tv1:
+
+//                TextView ll = findViewById(R.id.id_TL_tv1);
+//                ll.setBackgroundColor(Color.WHITE);
+
+
                 showInfo();
                 break;
             case R.id.id_TL_tv2:
@@ -1786,6 +2235,7 @@ public class ECGShowActivity extends FragmentActivity implements View.OnClickLis
 
     }
 
+    //点击左边禁忌模块
     private void showInfo() {
         String content;
         content = "......\n.....\n....";
@@ -1845,6 +2295,8 @@ public class ECGShowActivity extends FragmentActivity implements View.OnClickLis
     @Override
     protected void onDestroy() {
         super.onDestroy();
+
+        waveUtil1.stop();//心电图画图界面停止
 //        isTrue=false;
 //        stopService(new Intent(ECGShowActivity.this,SendECGService.class));
         handler.removeCallbacks(runnable);
@@ -1852,8 +2304,10 @@ public class ECGShowActivity extends FragmentActivity implements View.OnClickLis
         colseHreadshockable();
         EventBus.getDefault().unregister(this);
         stopAllService();
-        stopService(completeinjection);
-        stopService(completeshock);
+        if(completeinjection!=null)
+            stopService(completeinjection);
+        if(completeshock!=null)
+            stopService(completeshock);
         if(isWindowView){
             windowManager.removeView(windowview);
         }
@@ -1897,6 +2351,7 @@ public class ECGShowActivity extends FragmentActivity implements View.OnClickLis
         }
     }
     @RequiresApi(api = Build.VERSION_CODES.M)
+
     private void showFloatingWindow() {
         if (Settings.canDrawOverlays(this)) {
             // 获取WindowManager服务
@@ -1950,6 +2405,26 @@ public class ECGShowActivity extends FragmentActivity implements View.OnClickLis
         }
     }
 
+    Handler handler_ECG = new Handler(){
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+            //System.out.println(msg.what == );
+            if(msg.what == HandleWhatFlag.FLAG_EcgSensor_OK.ordinal()){
+                // 打开成功
+                Toast.makeText(ECGShowActivity.this,msg.obj.toString(),Toast.LENGTH_LONG).show();
+            }else if(msg.what == HandleWhatFlag.FLAG_EcgSensor_ERROR.ordinal()){
+                // 打开失败
+                Toast.makeText(ECGShowActivity.this,msg.obj.toString(),Toast.LENGTH_LONG).show();
+                switch_ECG.setChecked(false);
+            }else {
+                Double data = (Double) msg.obj;
+                // 绘制表格
+                wave_view1.showLine((float) (data % 20));
+            }
+        }
+    };
+
     int yourChoice;
     private void showSingleChoiceDialog(){
         final String[] items = { "成人","孕妇","儿童","婴儿" };
@@ -1992,4 +2467,63 @@ public class ECGShowActivity extends FragmentActivity implements View.OnClickLis
         singleChoiceDialog.show();
     }
 
+//开关按钮
+    //心电传感器开关
+
+    private boolean ECG_bool = false;
+    @SuppressLint("WrongConstant")
+    public void ECG_Device_Switch(View view) {
+        /*
+         * 强转为Switch类型的
+         */
+        boolean isChecked = ((Switch) view).isChecked();
+        if (isChecked == true) {
+            // 标记当前心率传感器是否打开
+            ECG_bool = true;
+           new Thread(){
+                @Override
+                public void run() {
+                    //执行心电传感器 开的网络接口
+                    ReturnData data = DataProcessingClass.OpenDevice(Device.CODE_EcgSensor);
+                    Message msg = new Message();
+                    System.out.println("flags : "+data.Msg);
+                    msg.obj = "心电传感器打开成功！";
+                    if(data.State){
+                        msg.what = HandleWhatFlag.FLAG_EcgSensor_OK.ordinal();
+                    }else {
+                        msg.what = HandleWhatFlag.FLAG_EcgSensor_ERROR.ordinal();
+                    }
+                    handler_ECG.sendMessage(msg);
+                }
+            }.start();
+
+        } else {
+            ECG_bool = false;
+            new Thread(){
+                @Override
+                public void run() {
+                    //执行心电传感器 关的网络接口
+                    ReturnData data = DataProcessingClass.CloseDevice(Device.CODE_EcgSensor);
+
+                    if(data.State){
+                        m_threadManager.stopThreadByName("ECGTHREAD");
+                    }
+                    Message msg = new Message();
+                    msg.obj = data.Msg;
+
+                    if(data.State){
+                        msg.what = HandleWhatFlag.FLAG_EcgSensor_OK.ordinal();
+                    }else {
+                        msg.what = HandleWhatFlag.FLAG_EcgSensor_ERROR.ordinal();
+                    }
+                    handler_ECG.sendMessage(msg);
+                }
+            }.start();
+        }
+
+
+    }
+
 }
+
+

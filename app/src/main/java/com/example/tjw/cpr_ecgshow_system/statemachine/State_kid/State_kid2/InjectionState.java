@@ -59,8 +59,6 @@ public class InjectionState extends State implements statemachinettree {
                 rev = HANDLED;
                 break;
 
-//
-
             default:
                 Log.d("injectionState","NOT_HANDLED"+msg.what);
                 rev = NOT_HANDLED;

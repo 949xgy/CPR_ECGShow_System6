@@ -5,6 +5,8 @@ import android.content.Intent;
 import android.os.IBinder;
 import android.util.Log;
 
+import com.example.tjw.cpr_ecgshow_system.ECGShowActivity;
+import com.example.tjw.cpr_ecgshow_system.interfaces.IServiceReceived;
 import com.google.gson.Gson;
 
 import java.io.BufferedReader;
@@ -30,6 +32,9 @@ public class  oprationService extends Service
     private Thread thread_hreat;
     //    套接字
     private Socket socket=null;
+
+    // 事件监听器
+    IServiceReceived iServiceReceived;
 
     private void linkSocket() {
         thread_hreat = new Thread() {
@@ -110,12 +115,19 @@ public class  oprationService extends Service
     public void onCreate() {
         super.onCreate();
         linkSocket();
+
+            dealEvnt();
+    }
+
+    private void dealEvnt() {
+
     }
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
         isTrue = true;
         return super.onStartCommand(intent, flags, startId);
+
     }
 
 

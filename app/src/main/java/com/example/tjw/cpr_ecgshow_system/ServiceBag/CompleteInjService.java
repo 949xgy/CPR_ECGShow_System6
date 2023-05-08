@@ -23,6 +23,7 @@ public class CompleteInjService extends Service {
     Runnable runnable = new Runnable() {
         @Override
         public void run() {
+            // 随机数
             int data = random.nextInt(100);
             Log.d("CompleteInjService","注射操作随机数为："+String.valueOf(data));
             if(data<=10){

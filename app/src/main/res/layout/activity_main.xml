@@ -3,7 +3,6 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:minWidth="50dp"
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context="com.example.tjw.cpr_ecgshow_system.ECG_heartActivity">
@@ -26,6 +25,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:text="常见心电图"
+            android:textColor="#ffffff"
             android:textSize="25dp" />
 
 

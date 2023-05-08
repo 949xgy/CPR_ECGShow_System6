@@ -22,13 +22,14 @@ import com.example.tjw.cpr_ecgshow_system.statemachine.State_kid.WaitState;
 public class Test_State_tree extends StateMachine {
     private Context contxt;
     private ECGShowActivity activity;
-    WaitState w1 = new WaitState();
-    ActiveState a1 = new ActiveState();
-    CPRState c1 = new CPRState();
-    InjectionState i1 = new InjectionState();
-    ShockState s1 = new ShockState();
-    Cpr_AlertState al1 = new Cpr_AlertState();
-    Cpr_NormalState n1 = new Cpr_NormalState();
+
+    WaitState w1 = new WaitState();         //等待状态
+    ActiveState a1 = new ActiveState();     //活动状态
+    CPRState c1 = new CPRState();            //CPR状态
+    InjectionState i1 = new InjectionState();   //注射状态
+    ShockState s1 = new ShockState();           //电击状态
+    Cpr_AlertState al1 = new Cpr_AlertState();  //警告状态
+    Cpr_NormalState n1 = new Cpr_NormalState(); //正常状态
 //    Inj_AlertState Inj_A1 = new Inj_AlertState();
 //    Inj_NormalState InJ_N1 = new Inj_NormalState();
 //    Shock_AlertState Sh_A1 = new Shock_AlertState();
@@ -145,19 +146,20 @@ public class Test_State_tree extends StateMachine {
 
     }
 
-    public static Test_State_tree makeTest_State_tree(Context context, Activity activity){
-        Test_State_tree T1 = new Test_State_tree("tree",context, (ECGShowActivity) activity);
 //        启动状态机
+    public static Test_State_tree makeTest_State_tree(Context context, Activity activity){
+        Test_State_tree T1 = new Test_State_tree("流程tree",context, (ECGShowActivity) activity);
+
         T1.start();
         return T1;
     }
 
 //    调用MainActivity的方法
     public void startAllService(){
-        activity.startAllService();
+        activity.startAllService();  //开启全部服务
         }
     public void stopAllService(){
-        activity.stopAllService();
+        activity.stopAllService();  //关闭全部服务
 
     }
     public void tipInjection(){

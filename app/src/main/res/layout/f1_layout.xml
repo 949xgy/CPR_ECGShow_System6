@@ -3,12 +3,65 @@
     android:id="@+id/id_f1_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:gravity="center"
+    android:gravity="center_horizontal"
+    android:weightSum="100"
     android:background="@drawable/fragment_border"
-    android:orientation="vertical">
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="f1"/>
+    android:orientation="horizontal">
+    <LinearLayout
+        android:layout_weight="50"
+        android:layout_width="0dp"
+        android:orientation="vertical"
+        android:layout_height="match_parent">
+        <Switch
+            android:id="@+id/switch_open_device"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="打开设备">
+
+        </Switch>
+
+        <TextView
+            android:visibility="invisible"
+            android:id="@+id/tv_f1_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#1E8FFE"
+            android:textSize="10sp"
+            android:textFontWeight="500"
+            android:text="心脏复苏姿态检测中...">
+
+        </TextView>
+
+        <ImageView
+            android:id="@+id/iv_tip"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+        </ImageView>
+
+        <TextView
+            android:textSize="20sp"
+            android:id="@+id/tv_f1_tip"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+        </TextView>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_weight="50"
+        android:layout_width="0dp"
+        android:layout_height="match_parent">
+        <EditText
+            android:id="@+id/et_fragment_console"
+            android:textColor="#86B05C"
+            android:singleLine="false"
+            android:textSize="10sp"
+            android:gravity="top"
+            android:background="#000000"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        </EditText>
+    </LinearLayout>
 
 </LinearLayout>

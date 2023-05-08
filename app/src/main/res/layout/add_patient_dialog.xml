@@ -1,291 +1,256 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="fill_parent"
     android:layout_height="match_parent"
-    android:overScrollMode="ifContentScrolls">
+    android:orientation="vertical">
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+       <LinearLayout
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           android:orientation="vertical"
+           >
+
+           <LinearLayout
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:orientation="horizontal"
+               android:gravity="center_vertical"
+               android:padding="10dp"
+               >
+               <TextView
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:text="病人姓名:"
+                   android:textSize="25sp"
+                   />
+               <EditText
+                   android:id="@+id/add_patientName"
+                   android:hint="输入病人姓名"
+                   android:singleLine="true"
+                   android:layout_weight="100"
+                   android:layout_width="0dp"
+                   android:layout_height="wrap_content">
+
+               </EditText>
+           </LinearLayout>
+           <LinearLayout
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:orientation="horizontal"
+               android:gravity="center_vertical"
+               android:padding="10dp"
+               >
+               <TextView
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:text="病人性别:"
+                   android:textSize="25sp"
+                   />
+               <RadioGroup
+                   android:id="@+id/add_patientSexs"
+                   android:layout_weight="100"
+                   android:layout_width="0dp"
+                   android:layout_height="wrap_content"
+                   android:orientation="horizontal"
+                   >
+
+                   <RadioButton
+                       android:checked="true"
+                       android:textSize="25sp"
+                       android:layout_width="wrap_content"
+                       android:layout_height="wrap_content"
+                       android:text="男"
+                       >
+
+                   </RadioButton>
+
+                   <Space
+                       android:layout_weight="100"
+                       android:layout_width="0dp"
+                       android:layout_height="match_parent"
+                       >
+
+                   </Space>
+                   <RadioButton
+                       android:textSize="25sp"
+                       android:layout_width="wrap_content"
+                       android:layout_height="wrap_content"
+                       android:text="女"
+                       >
+
+                   </RadioButton>
+
+               </RadioGroup>
+           </LinearLayout>
+           <LinearLayout
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:orientation="horizontal"
+               android:gravity="center_vertical"
+               android:padding="10dp"
+               >
+               <TextView
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:text="病人年龄:"
+                   android:textSize="25sp"
+                   />
+               <EditText
+                   android:id="@+id/add_patientAge"
+                   android:hint="输入病人年龄"
+                   android:inputType="number"
+                   android:singleLine="true"
+                   android:layout_weight="100"
+                   android:layout_width="0dp"
+                   android:layout_height="wrap_content">
+
+               </EditText>
+           </LinearLayout>
+           <LinearLayout
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:orientation="horizontal"
+               android:gravity="center_vertical"
+               android:padding="10dp"
+               >
+               <TextView
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:text="病人房间号:"
+                   android:textSize="25sp"
+                   />
+               <EditText
+                   android:id="@+id/add_patientRoom"
+                   android:hint="输入病人的房间号"
+                   android:singleLine="true"
+                   android:layout_weight="100"
+                   android:layout_width="0dp"
+                   android:layout_height="wrap_content">
+
+               </EditText>
+           </LinearLayout>
+           <LinearLayout
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:orientation="horizontal"
+               android:gravity="center_vertical"
+               android:padding="10dp"
+               >
+               <TextView
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:text="病人病床号:"
+                   android:textSize="25sp"
+                   />
+               <EditText
+                   android:id="@+id/add_patientBed"
+                   android:hint="输入病人的病床号"
+                   android:singleLine="true"
+                   android:layout_weight="100"
+                   android:layout_width="0dp"
+                   android:layout_height="wrap_content">
+
+               </EditText>
+           </LinearLayout>
+           <LinearLayout
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:orientation="horizontal"
+               android:gravity="center_vertical"
+               android:padding="10dp"
+               >
+               <TextView
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:text="家属联系方式:"
+                   android:textSize="25sp"
+                   />
+               <EditText
+                   android:id="@+id/add_patientPhone"
+                   android:hint="输入家属联系方式"
+                   android:singleLine="true"
+                   android:layout_weight="100"
+                   android:layout_width="0dp"
+                   android:layout_height="wrap_content">
+
+               </EditText>
+           </LinearLayout>
+           <LinearLayout
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:orientation="horizontal"
+               android:gravity="center_vertical"
+               android:padding="10dp"
+               >
+               <TextView
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:text="病人身份证:"
+                   android:textSize="25sp"
+                   />
+               <EditText
+                   android:id="@+id/add_patientId"
+                   android:hint="输入家属的身份证号码"
+                   android:singleLine="true"
+                   android:layout_weight="100"
+                   android:layout_width="0dp"
+                   android:layout_height="wrap_content">
+
+               </EditText>
+           </LinearLayout>
+           <LinearLayout
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:orientation="horizontal"
+               android:gravity="center_vertical"
+               android:padding="10dp"
+               >
+               <TextView
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:text="病人病况:"
+                   android:textSize="25sp"
+                   />
+               <EditText
+                   android:id="@+id/add_patientSituation"
+                   android:hint="输入家属的病况"
+                   android:singleLine="true"
+                   android:layout_weight="100"
+                   android:layout_width="0dp"
+                   android:layout_height="wrap_content">
+
+               </EditText>
+           </LinearLayout>
+           <LinearLayout
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:orientation="horizontal"
+               android:gravity="center_vertical"
+               android:padding="10dp"
+               >
+               <TextView
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:text="主治医生:"
+                   android:textSize="25sp"
+                   />
+               <EditText
+                   android:id="@+id/add_patientDoc"
+                   android:hint="输入主治医生的姓名"
+                   android:singleLine="true"
+                   android:layout_weight="100"
+                   android:layout_width="0dp"
+                   android:layout_height="wrap_content">
+
+               </EditText>
+           </LinearLayout>
+       </LinearLayout>
+
+    </ScrollView>
 
 
-
-    <LinearLayout
-        android:id="@+id/create_user_dialog_view"
-        android:layout_width="fill_parent"
-        android:layout_height="match_parent"
-        android:minWidth="200dp"
-        android:orientation="vertical"
-        android:padding="10dp"
-        android:paddingBottom="30dp"
-        android:paddingTop="30dp"
-        >
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="horizontal"
-            android:layout_margin="5dp"
-            >
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:layout_marginTop="20dp"
-                android:text="姓名:"/>
-
-
-            <EditText
-                android:id="@+id/add_patientName"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="2"
-                android:hint="输入患者姓名"
-                android:minHeight="45dp"
-                android:textSize="18sp" />
-        </LinearLayout>
-
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="horizontal"
-            android:layout_margin="5dp"
-            >
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:layout_marginTop="20dp"
-                android:text="家属电话:"/>
-
-
-            <EditText
-                android:id="@+id/add_patientPhone"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                android:layout_weight="2"
-                android:inputType="number"
-                android:hint="家属联系电话"
-                android:minHeight="45dp"
-                android:textSize="18sp" />
-        </LinearLayout>
-
-
-
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="horizontal"
-            android:layout_margin="5dp"
-            >
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:layout_marginTop="20dp"
-                android:text="性别:"/>
-
-
-            <EditText
-                android:id="@+id/add_patientSex"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                android:layout_weight="2"
-                android:hint="输入性别"
-                android:minHeight="45dp"
-                android:textSize="18sp" />
-        </LinearLayout>
-
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="horizontal"
-            android:layout_margin="5dp"
-            >
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:layout_marginTop="20dp"
-                android:text="身份证:"/>
-
-
-            <EditText
-                android:id="@+id/add_patientID"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                android:layout_weight="2"
-                android:inputType="number"
-                android:hint="输入身份证号"
-                android:minHeight="45dp"
-                android:textSize="18sp" />
-        </LinearLayout>
-
-
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="horizontal"
-            android:layout_margin="5dp"
-            >
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:layout_marginTop="20dp"
-                android:text="年龄:"/>
-
-            <EditText
-                android:id="@+id/add_patientAge"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="2"
-                android:hint="输入年龄"
-                android:inputType="number"
-                android:minHeight="45dp"
-                android:textSize="18sp" />
-        </LinearLayout>
-
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="horizontal"
-            android:layout_margin="5dp"
-            >
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:layout_marginTop="20dp"
-                android:text="主治医生:"/>
-
-
-            <EditText
-                android:id="@+id/add_patientDoc"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="2"
-                android:hint="主治医生"
-                android:minHeight="45dp"
-                android:textSize="18sp" />
-        </LinearLayout>
-
-
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="horizontal"
-            android:layout_margin="5dp"
-            >
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:layout_marginTop="20dp"
-                android:text="病房号:"/>
-
-            <EditText
-                android:id="@+id/add_patientRoom"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="2"
-                android:hint="病房号"
-                android:inputType="number"
-                android:minHeight="45dp"
-                android:textSize="18sp" />
-        </LinearLayout>
-
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="horizontal"
-            android:layout_margin="5dp"
-            >
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:layout_marginTop="20dp"
-                android:text="病床号:"/>
-
-            <EditText
-                android:id="@+id/add_patientBed"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="2"
-                android:hint="病床号"
-                android:inputType="number"
-                android:minHeight="45dp"
-                android:textSize="18sp" />
-        </LinearLayout>
-
-
-
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="horizontal"
-
-            android:layout_margin="5dp"
-            >
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:layout_marginTop="20dp"
-                android:text="既往病史:"/>
-
-            <EditText
-                android:id="@+id/add_patientPmh"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                android:layout_weight="2"
-                android:hint="输入既往病史"
-                android:minHeight="45dp"
-                android:textSize="18sp" />
-        </LinearLayout>
-
-
-
-
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="horizontal"
-
-            android:layout_margin="5dp"
-            >
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:layout_marginTop="20dp"
-                android:text="病症:"/>
-
-            <EditText
-                android:id="@+id/add_patientState"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                android:layout_weight="2"
-                android:hint="病症"
-                android:minHeight="45dp"
-                android:textSize="18sp" />
-        </LinearLayout>
-
-
-
-
-    </LinearLayout>
-
-</ScrollView>
+</LinearLayout>

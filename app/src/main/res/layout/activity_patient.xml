@@ -1,24 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="fill_parent"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:overScrollMode="ifContentScrolls"
-    android:background="@drawable/bg_1"
-    >
-<LinearLayout
-    android:layout_width="fill_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:minWidth="200dp"
-    >
-<!--   导航栏-->
+    android:weightSum="100"
+    android:orientation="vertical">
+    <!--   导航栏-->
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
+        android:layout_height="0dp"
+        android:layout_weight="8"
         android:background="?attr/colorPrimary"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -31,367 +24,66 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:text="病人信息"
-            android:textSize="25dp" />
-
+            android:textColor="#ffffff"
+            android:textSize="20dp" />
 
     </android.support.v7.widget.Toolbar>
 
-<!--查询框-->
-    <LinearLayout
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="horizontal"
-    android:gravity="center"
-    >
-    <EditText
-        android:id="@+id/et_find_patientName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@drawable/edit_selector"
-        android:drawableLeft="@drawable/re_fgx"
-        android:drawableRight="@drawable/p_search"
-        android:hint="输入要查找的病人姓名"
-        />
-
-    <Button
-        android:id="@+id/btn_find_patient"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@drawable/shape"
-        android:text="查询"
-        />
-</LinearLayout>
-
-
-
-<!--显示查找到信息的内容  没查到不显示-->
-    <LinearLayout
-    android:id="@+id/layout_out"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:visibility="gone"
-    >
-
-
+<!--    内容搜索区域-->
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="15dp"
-            android:hint="患者姓名:"
-            />
-        <TextView
-            android:id="@+id/tv_patientName"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="15dp"
-            android:hint=""
-            />
-    </LinearLayout>
-
-
-
-
-
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="10"
+        android:gravity="center_vertical"
         android:orientation="horizontal"
-        >
+        android:padding="5dp">
 
-        <LinearLayout
+
+        <EditText
+            android:id="@+id/et_searchInpatient"
             android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:orientation="horizontal">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="15dp"
-                android:hint="性        别:"
-                />
-            <TextView
-                android:id="@+id/tv_patientSex"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="15dp"
-                android:hint=""
-                />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:orientation="horizontal">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="11dp"
-                android:layout_margin="15dp"
-                android:hint="年      龄:"
-                />
-            <TextView
-                android:id="@+id/tv_patientAge"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="11dp"
-                android:layout_margin="15dp"
-                android:hint=""
-                />
-
-
-        </LinearLayout>
-
-    </LinearLayout>
-
-
-
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="horizontal">
-
-
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
+            android:layout_weight="100"
+            android:hint="输入要查找的病人信息"
+            android:layout_height="wrap_content"
             >
 
-            <TextView
-
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-
-                android:layout_marginTop="11dp"
-                android:layout_margin="15dp"
-                android:hint="病  房  号:"
-                />
-            <TextView
-                android:id="@+id/tv_patientRoom"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-
-                android:layout_marginTop="11dp"
-                android:layout_margin="15dp"
-                android:hint=""
-                />
-
-
-
-        </LinearLayout>
-
-   <LinearLayout
-       android:layout_width="0dp"
-       android:layout_height="match_parent"
-       android:layout_weight="1"
-       >
-
-       <TextView
-           android:layout_width="wrap_content"
-           android:layout_height="wrap_content"
-           android:layout_margin="15dp"
-           android:hint="病 床 号:"
-           />
-       <TextView
-           android:id="@+id/tv_patientBed"
-           android:layout_width="wrap_content"
-           android:layout_height="wrap_content"
-           android:layout_margin="15dp"
-           android:hint=""
-           />
-
-
-   </LinearLayout>
-
-
-    </LinearLayout>
-
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-        <TextView
-
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="15dp"
-            android:hint="家属电话:"
-            />
-        <TextView
-            android:id="@+id/tv_patientPhone"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="15dp"
-            android:hint=""
-            />
-
-
-    </LinearLayout>
-
-
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="15dp"
-            android:hint="身份证号:"
-            />
-        <TextView
-            android:id="@+id/tv_patientID"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="15dp"
-            android:hint=""
-
-            />
-
-
-    </LinearLayout>
-
-
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="15dp"
-            android:hint="主治医师:"
-            />
-        <TextView
-            android:id="@+id/tv_patientDoc"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-
-            android:layout_margin="15dp"
-            android:hint=""
-            />
-
-    </LinearLayout>
-
-
-
-
-
-
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="15dp"
-            android:hint="既往病史:"
-            />
-        <TextView
-            android:id="@+id/tv_patientPmh"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="15dp"
-            android:hint=""
-            />
-    </LinearLayout>
-
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="15dp"
-            android:hint="病        症:"
-            />
-        <TextView
-            android:id="@+id/tv_patientState"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="15dp"
-            android:hint=""
-            />
-    </LinearLayout>
-
-
-
-
-
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="horizontal"
-        android:gravity="center"
-        >
-
+        </EditText>
 
         <Button
-            android:id="@+id/btn_update_patient"
-            android:layout_width="0dp"
-            android:layout_weight="1"
+            android:id="@+id/btn_searchInpatient"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@drawable/shape"
-            android:layout_margin="1dp"
-            android:text="修改"
-            />
-        <Button
-            android:id="@+id/btn_back"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:background="@drawable/shape"
-            android:layout_margin="1dp"
-            android:text="返回"
-             />
+            android:text="搜索"
+            android:paddingLeft="15dp">
+
+        </Button>
+
 
     </LinearLayout>
 
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="82">
 
+        <ListView
+            android:id="@+id/list_showInpatientInfo"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
-</LinearLayout>
+        </ListView>
 
-
-    　<!-- 该部分显示在底部  -->
-         <LinearLayout
-             android:layout_width="fill_parent"
-             android:layout_height="wrap_content"
-             android:gravity="bottom"
-             android:orientation="vertical">
-        <Button
-            android:id="@+id/btn_add_patient"
-            android:layout_width="66dp"
-            android:layout_height="66dp"
-            android:layout_margin="1dp"
+        <ImageButton
+            android:id="@+id/imgBtn_addInpatient"
             android:background="@drawable/button_list"
+            android:padding="0dp"
+            android:layout_gravity="bottom|right"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_marginBottom="60dp"
+            android:layout_marginRight="30dp">
 
-            android:layout_gravity="center"
-
-             />
-
-
-        </LinearLayout>
-
-
-
+        </ImageButton>
+    </FrameLayout>
 
 </LinearLayout>
-
-</ScrollView>

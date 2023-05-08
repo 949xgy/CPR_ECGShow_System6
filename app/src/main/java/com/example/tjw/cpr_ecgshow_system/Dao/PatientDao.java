@@ -9,6 +9,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * 该类包含对病人信息表的操作
@@ -27,7 +29,7 @@ public class PatientDao {
 
         int result=0;
         bo = false;
-        new Thread(){
+        Thread aa=new Thread(){
             @Override
             public void run() {
                 try {
@@ -56,13 +58,12 @@ public class PatientDao {
                     throwables.printStackTrace();
                 }
             }
-        }.start();
+        };
+        aa.start();
 
 
-        try {
-            Thread.sleep(1000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
+        while (aa.isAlive()){
+            System.out.println("准备返回aa.isAlive()----->"+aa.isAlive());
         }
 
         System.out.println("准备返回addPatient----->"+bo);
@@ -74,7 +75,7 @@ public class PatientDao {
     public Boolean CheckIsPatientExists(String value){
 
         bo = false;
-        new Thread(){
+        Thread aa=new Thread(){
             @Override
             public void run() {
                 try {
@@ -97,13 +98,12 @@ public class PatientDao {
                     throwables.printStackTrace();
                 }
             }
-        }.start();
+        };
+        aa.start();
 
 
-        try {
-            Thread.sleep(1000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
+        while (aa.isAlive()){
+            System.out.println("准备返回aa.isAlive()----->"+aa.isAlive());
         }
 
         System.out.println("准备返回CheckIsPatientExists------->"+bo);
@@ -117,7 +117,7 @@ public class PatientDao {
         Patient patient=new Patient();
         patient.setPatientName(name);
 
-        new Thread(){
+        Thread aa=new Thread(){
             @Override
             public void run() {
                 try {
@@ -159,27 +159,139 @@ public class PatientDao {
                     throwables.printStackTrace();
                 }
             }
-        }.start();
+        };
+        aa.start();
 
 
 
-        try {
-            Thread.sleep(1000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
+        while (aa.isAlive()){
+            System.out.println("准备返回aa.isAlive()----->"+aa.isAlive());
         }
         System.out.println("FindDoctorByName---->准备返回doctor对象");
         return patient;
 
 
     }
+    // 根据姓名找到病人并返回一个列表数组
+    public List<Patient> findPatients(String name){
 
+        Patient patient=new Patient();
+        patient.setPatientName(name);
+        List<Patient> patients = new ArrayList<Patient>();
+
+        Thread aa=new Thread(){
+            @Override
+            public void run() {
+                try {
+                    connMysql = DButils.ConnMysql();
+                    String Query="select * from tb_patient where patientName like ?";
+                    PreparedStatement pst=connMysql.prepareStatement(Query);
+                    pst.setString(1,name);
+                    ResultSet rs=pst.executeQuery();
+                    while(rs.next()){
+                        // 通过字段检索
+                        String phone = rs.getString("patientPhone");
+                        String sex  = rs.getString("patientSex");
+                        String ID = rs.getString("patientID");
+                        int age = rs.getInt("patientAge");
+                        String doc = rs.getString("patientDoc");
+                        int room = rs.getInt("patientRoom");
+                        int bed = rs.getInt("patientBed");
+                        String pmh = rs.getString("patientPmh");
+                        String state = rs.getString("patientState");
+
+                        patient.setPatientPhone(phone);
+                        patient.setPatientSex(sex);
+                        patient.setPatientID(ID);
+                        patient.setPatientAge(age);
+                        patient.setPatientDoc(doc);
+                        patient.setPatientRoom(room);
+                        patient.setPatientBed(bed);
+                        patient.setPatientPmh(pmh);
+                        patient.setPatientState(state);
+
+                        patients.add(patient);
+                    }
+
+                    rs.close();
+                    pst.close();
+                    connMysql.close();
+
+                } catch (SQLException  throwables) {
+                    throwables.printStackTrace();
+                }
+            }
+        };
+        aa.start();
+        // 循环等待线程结束
+        while (aa.isAlive()){}
+        // 提交返回数据
+        return patients;
+
+    }
+    //根据身份证找到病人并返回一个列表数组
+    public List<Patient> findPatients2(String id){
+        Patient patient=new Patient();
+
+        List<Patient> patients = new ArrayList<Patient>();
+
+        Thread aa=new Thread(){
+            @Override
+            public void run() {
+                try {
+                    connMysql = DButils.ConnMysql();
+                    String Query="select * from tb_patient where patientID like ?";
+                    PreparedStatement pst=connMysql.prepareStatement(Query);
+                    pst.setString(1,id);
+                    ResultSet rs=pst.executeQuery();
+                    while(rs.next()){
+                        // 通过字段检索
+                        String phone = rs.getString("patientPhone");
+                        String sex  = rs.getString("patientSex");
+                        String ID = rs.getString("patientID");
+                        int age = rs.getInt("patientAge");
+                        String doc = rs.getString("patientDoc");
+                        int room = rs.getInt("patientRoom");
+                        int bed = rs.getInt("patientBed");
+                        String pmh = rs.getString("patientPmh");
+                        String state = rs.getString("patientState");
+
+                        patient.setPatientID(id);
+                        patient.setPatientName(rs.getString("patientName"));
+                        patient.setPatientPhone(phone);
+                        patient.setPatientSex(sex);
+                        patient.setPatientID(ID);
+                        patient.setPatientAge(age);
+                        patient.setPatientDoc(doc);
+                        patient.setPatientRoom(room);
+                        patient.setPatientBed(bed);
+                        patient.setPatientPmh(pmh);
+                        patient.setPatientState(state);
+
+                        patients.add(patient);
+                    }
+
+                    rs.close();
+                    pst.close();
+                    connMysql.close();
+
+                } catch (SQLException  throwables) {
+                    throwables.printStackTrace();
+                }
+            }
+        };
+        aa.start();
+        // 循环等待线程结束
+        while (aa.isAlive()){}
+        // 提交返回数据
+        return patients;
+    }
     //修改病人基本信息
     public Boolean updatePatient(Integer room,Integer bed,String doc,String phone,String state,String name){
 
         int result=0;
         bo = false;
-        new Thread(){
+        Thread aa=new Thread(){
             @Override
             public void run() {
                 try {
@@ -205,13 +317,12 @@ public class PatientDao {
                     throwables.printStackTrace();
                 }
             }
-        }.start();
+        };
+        aa.start();
 
 
-        try {
-            Thread.sleep(1000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
+        while (aa.isAlive()){
+            System.out.println("子线程还在运行    准备返回aa.isAlive()----->"+aa.isAlive());
         }
 
         System.out.println("准备返回updatePatient---->"+bo);

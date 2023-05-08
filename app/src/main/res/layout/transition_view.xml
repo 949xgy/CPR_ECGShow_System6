@@ -1,22 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--开屏欢迎页面-->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:id="@+id/start_bg"
-
-android:background="@drawable/bg_5"
+    android:gravity="center_horizontal|center_vertical"
     >
+
+    <ImageView
+        android:id="@+id/img_icon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@mipmap/icon_01">
+
+    </ImageView>
+
     <TextView
+        android:layout_marginTop="12dp"
         android:id="@+id/start_text"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:gravity="center"
-        android:textSize="33dp"
-        android:text="欢迎进入">
+        android:text="欢迎进入"
+        android:textColor="#008FEC"
+        android:textSize="33dp">
 
     </TextView>
-
-
 
 </LinearLayout>

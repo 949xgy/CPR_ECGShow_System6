@@ -77,8 +77,8 @@ public class DoctorActivity extends AppCompatActivity {
     }
     //自定义修改医生信息对话框
     private void updateDialog(){
-        AlertDialog.Builder updateDialog = new AlertDialog.Builder(DoctorActivity.this);
-        final View dialogView = LayoutInflater.from(DoctorActivity.this).inflate(R.layout.update_doctor_dialog,null);
+        AlertDialog.Builder updateDialog = new AlertDialog.Builder(this.getApplicationContext());
+        final View dialogView = LayoutInflater.from(this.getApplicationContext()).inflate(R.layout.update_doctor_dialog,null);
         updateDialog.setTitle("修改医生信息对话框");
         updateDialog.setView(dialogView);
         updateDialog.setPositiveButton("确定", new DialogInterface.OnClickListener(){

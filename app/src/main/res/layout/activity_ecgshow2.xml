@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="fill_parent"
     android:layout_height="match_parent"
@@ -12,908 +13,975 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_margin="1dp" >
-<LinearLayout
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="#ffffff"
-    android:baselineAligned="false"
-    android:orientation="horizontal">
 
-
-
-
-
-
-<!--左边一列-->
-    <LinearLayout
-        android:id="@+id/id_left_layout"
-        android:layout_width="0dp"
-        android:layout_height="match_parent"
-        android:layout_weight="1"
-        android:orientation="vertical">
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="20dp"
-            android:layout_marginStart="5dp"
-            android:text="Measurement Readings"
-            android:textStyle="bold" />
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="350dp"
-            android:layout_marginTop="5dp"
-            android:background="@drawable/layout_border"
-            android:gravity="center">
-
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
             <LinearLayout
-                android:id="@+id/id_MR_layout1"
-                android:layout_width="120dp"
-                android:layout_height="match_parent"
-                android:orientation="vertical">
-
-                <include
-                    android:id="@+id/include_HR"
-                    layout="@layout/mr_items" />
-
-                <ImageView
-                    android:layout_width="match_parent"
-                    android:layout_height="2dp"
-                    android:contentDescription="@null"
-                    android:src="#000000" />
-
-                <include
-                    android:id="@+id/include_BP"
-                    layout="@layout/mr_items" />
-
-                <ImageView
-
-                    android:layout_width="match_parent"
-                    android:layout_height="2dp"
-                    android:contentDescription="@null"
-                    android:src="#000000" />
-
-                <include
-                    android:id="@+id/include_PH"
-                    layout="@layout/mr_items" />
-
-                <ImageView
-                    android:layout_width="match_parent"
-                    android:layout_height="2dp"
-                    android:contentDescription="@null"
-                    android:src="#000000" />
-
-                <include
-                    android:id="@+id/include_PaCO2"
-                    layout="@layout/mr_items" />
-
-                <ImageView
-                    android:layout_width="match_parent"
-                    android:layout_height="2dp"
-                    android:contentDescription="@null"
-                    android:src="#000000" />
-
-                <include
-                    android:id="@+id/include_K"
-                    layout="@layout/mr_items" />
-
-            </LinearLayout>
-
-            <ImageView
-                android:id="@+id/iv_blackline"
-                android:layout_width="2dp"
-                android:layout_height="match_parent"
-                android:layout_toEndOf="@+id/id_MR_layout1"
-                android:contentDescription="@null"
-                android:src="#000000" />
-
-            <LinearLayout
-                android:id="@+id/id_MR_layout2"
-                android:layout_width="120dp"
-                android:layout_height="match_parent"
-                android:layout_toEndOf="@+id/iv_blackline"
-                android:orientation="vertical">
-
-                <include
-                    android:id="@+id/include_RR"
-                    layout="@layout/mr_items" />
-
-                <ImageView
-                    android:layout_width="match_parent"
-                    android:layout_height="2dp"
-                    android:contentDescription="@null"
-                    android:src="#000000" />
-
-                <include
-                    android:id="@+id/include_SPO2"
-                    layout="@layout/mr_items" />
-
-                <ImageView
-                    android:layout_width="match_parent"
-                    android:layout_height="2dp"
-                    android:contentDescription="@null"
-                    android:src="#000000" />
-
-                <include
-                    android:id="@+id/include_PaO2"
-                    layout="@layout/mr_items" />
-
-                <ImageView
-                    android:layout_width="match_parent"
-                    android:layout_height="2dp"
-                    android:contentDescription="@null"
-                    android:src="#000000" />
-
-                <include
-                    android:id="@+id/include_Mg"
-                    layout="@layout/mr_items" />
-
-                <ImageView
-                    android:layout_width="match_parent"
-                    android:layout_height="2dp"
-                    android:contentDescription="@null"
-                    android:src="#000000" />
-
-                <include
-                    android:id="@+id/include_Creat"
-                    layout="@layout/mr_items" />
-
-            </LinearLayout>
-
-        </RelativeLayout>
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="20dp"
-            android:layout_marginStart="5dp"
-            android:layout_marginTop="10dp"
-            android:text="Treatment List"
-            android:textStyle="bold" />
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="140dp"
-            android:layout_marginTop="5dp"
-            android:layout_marginBottom="5dp"
-            android:background="@drawable/layout_border"
-            android:padding="5dp">
-
-            <LinearLayout
-                android:id="@+id/id_TL_layout1"
-                android:layout_width="125dp"
-                android:layout_height="match_parent"
-                android:orientation="vertical">
-
-                <TextView
-                    android:id="@+id/id_TL_tv1"
-                    android:layout_width="match_parent"
-                    android:layout_height="30dp"
-                    android:background="#ff0000"
-                    android:gravity="center"
-
-                    android:text="EPI" />
-
-                <ImageView
-                    android:layout_width="match_parent"
-                    android:layout_height="2dp"
-                    android:contentDescription="@null"
-                    android:src="#000000" />
-
-                <TextView
-                    android:id="@+id/id_TL_tv2"
-                    android:layout_width="match_parent"
-                    android:layout_height="30dp"
-                    android:background="#ffc800"
-                    android:gravity="center"
-                    android:text="Vasopressin" />
-
-                <ImageView
-                    android:layout_width="match_parent"
-                    android:layout_height="2dp"
-                    android:contentDescription="@null"
-                    android:src="#000000" />
-
-                <TextView
-                    android:id="@+id/id_TL_tv3"
-                    android:layout_width="match_parent"
-                    android:layout_height="30dp"
-                    android:background="#00ff00"
-                    android:gravity="center"
-                    android:text="Amiodarone" />
-
-                <ImageView
-                    android:layout_width="match_parent"
-                    android:layout_height="2dp"
-                    android:contentDescription="@null"
-                    android:src="#000000" />
-
-                <TextView
-                    android:id="@+id/id_TL_tv4"
-                    android:layout_width="match_parent"
-                    android:layout_height="30dp"
-                    android:background="#00ff00"
-                    android:gravity="center"
-                    android:text="Calcium" />
-
-            </LinearLayout>
-
-            <ImageView
-                android:id="@+id/iv_blackline1"
-                android:layout_width="2dp"
-                android:layout_height="126dp"
-                android:layout_toEndOf="@+id/id_TL_layout1"
-                android:contentDescription="@null"
-                android:src="#000000" />
-
-            <LinearLayout
-                android:id="@+id/id_TL_layout2"
-                android:layout_width="125dp"
-                android:layout_height="match_parent"
-                android:layout_toEndOf="@+id/iv_blackline1"
-                android:orientation="vertical">
-
-                <TextView
-                    android:id="@+id/id_TL_tv5"
-                    android:layout_width="match_parent"
-                    android:layout_height="30dp"
-                    android:background="#ffc800"
-                    android:gravity="center"
-                    android:text="Bicarbonate" />
-
-                <ImageView
-                    android:layout_width="match_parent"
-                    android:layout_height="2dp"
-                    android:contentDescription="@null"
-                    android:src="#000000" />
-
-                <TextView
-                    android:id="@+id/id_TL_tv6"
-                    android:layout_width="match_parent"
-                    android:layout_height="30dp"
-                    android:background="#00ff00"
-                    android:gravity="center"
-                    android:text="Levophed" />
-
-                <ImageView
-                    android:layout_width="match_parent"
-                    android:layout_height="2dp"
-                    android:contentDescription="@null"
-                    android:src="#000000" />
-
-                <TextView
-                    android:id="@+id/id_TL_tv7"
-                    android:layout_width="match_parent"
-                    android:layout_height="30dp"
-                    android:background="#00ff00"
-                    android:gravity="center"
-                    android:text="Magnesium" />
-
-                <ImageView
-                    android:layout_width="match_parent"
-                    android:layout_height="2dp"
-                    android:contentDescription="@null"
-                    android:src="#000000" />
-
-                <TextView
-                    android:id="@+id/id_TL_tv8"
-                    android:layout_width="match_parent"
-                    android:layout_height="30dp"
-                    android:background="#ffc800"
-                    android:gravity="center"
-                    android:text="Shock" />
-
-            </LinearLayout>
-
-        </RelativeLayout>
-
-
-<!--第一列 最下面-->
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@drawable/layout_border"
-            >
-
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical">
-                <TextView
-                    android:id="@+id/id_tv_fragment1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="40dp"
-                    android:layout_marginStart="3dp"
-                    android:background="@drawable/textview_border"
-                    android:gravity="center"
-                    android:padding="3dp"
-                    android:text="Patient Info/Notes"
-                    android:textSize="15sp" />
-
-
-            <LinearLayout
-                android:id="@+id/id_title_layout"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="3dp"
+                android:background="#ffffff"
+                android:baselineAligned="false"
                 android:orientation="horizontal">
 
-
-
-                <TextView
-                    android:id="@+id/id_tv_fragment2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="40dp"
-                    android:layout_marginLeft="2dp"
-                    android:layout_marginRight="2dp"
-                    android:background="@drawable/textview_border"
-                    android:gravity="center"
-                    android:padding="3dp"
-                    android:text="Labs"
-                    android:textSize="15sp" />
-
-                <TextView
-                    android:id="@+id/id_tv_fragment3"
-                    android:layout_width="wrap_content"
-                    android:layout_height="40dp"
-                    android:layout_marginEnd="2dp"
-                    android:background="@drawable/textview_border"
-                    android:gravity="center"
-                    android:padding="3dp"
-                    android:text="Msg"
-                    android:textSize="15sp" />
-
-                <TextView
-                    android:id="@+id/id_tv_fragment4"
-                    android:layout_width="wrap_content"
-                    android:layout_height="40dp"
-                    android:background="@drawable/textview_border"
-                    android:gravity="center"
-                    android:padding="3dp"
-                    android:text="X-ray"
-                    android:textSize="15sp" />
-
-            </LinearLayout>
-
-                <FrameLayout
-                    android:id="@+id/id_fragment"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_below="@+id/id_title_layout"
-                    android:layout_margin="2dp">
-
-                </FrameLayout>
-
-            </LinearLayout>
-
-
-
-        </RelativeLayout>
-
-    </LinearLayout>
-<!--中间一列-->
-    <RelativeLayout
-        android:id="@+id/id_middle_layout"
-        android:layout_width="0dp"
-        android:layout_height="match_parent"
-        android:layout_weight="2.2"
-        android:paddingLeft="10dp"
-        android:paddingRight="10dp">
-
-        <TextView
-            android:id="@+id/id_tv_Heart"
-            android:layout_width="match_parent"
-            android:layout_height="20dp"
-            android:layout_marginStart="5dp"
-            android:text="Heart"
-            android:textColor="#000000"
-            android:textStyle="bold" />
-<!--<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<TJW心电图显示部分<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<    -->
-
-        <RelativeLayout
-            android:id="@+id/id_top_layout"
-            android:layout_width="match_parent"
-            android:layout_height="270dp"
-            android:layout_below="@+id/id_tv_Heart"
-            android:layout_marginBottom="5dp"
-            android:background="@drawable/layout_border"
-            android:gravity="center">
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical">
+                <!--左边一列-->
                 <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-                    <Button
-                        android:id="@+id/btn_start"
-                        android:layout_width="0dp"
-                        android:layout_weight="1"
-                        android:layout_height="wrap_content"
-                        android:text="启动" />
+                    android:id="@+id/id_left_layout"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
 
-                    <Button
-                        android:id="@+id/btn_set"
-                        android:layout_width="0dp"
-                        android:layout_weight="1"
-                        android:layout_height="wrap_content"
-                        android:layout_toRightOf="@+id/btn_start"
-                        android:text="设置" />
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="20dp"
+                        android:layout_marginStart="5dp"
+                        android:text="Measurement Readings"
+                        android:textStyle="bold" />
 
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="350dp"
+                        android:layout_marginTop="5dp"
+                        android:background="@drawable/layout_border"
+                        android:gravity="center">
 
-                    <Button
-                        android:id="@+id/btn_realDraw"
-                        android:layout_width="0dp"
-                        android:layout_weight="1"
-                        android:layout_height="wrap_content"
-                        android:layout_toRightOf="@+id/btn_readData"
-                        android:text="实时绘图" />
+                        <LinearLayout
+                            android:id="@+id/id_MR_layout1"
+                            android:layout_width="120dp"
+                            android:layout_height="match_parent"
+                            android:orientation="vertical">
+                            <include
 
-                    <Button
-                        android:id="@+id/btn_pause"
-                        android:layout_width="0dp"
-                        android:layout_weight="1"
-                        android:layout_height="wrap_content"
-                        android:layout_toRightOf="@+id/btn_realDraw"
-                        android:text="停止绘图" />
-                    <Button
-                        android:id="@+id/btn_windowview"
-                        android:layout_width="0dp"
-                        android:layout_weight="1"
-                        android:layout_height="wrap_content"
-                        android:layout_toRightOf="@+id/btn_pause"
-                        android:text="悬浮框" />
-                    <Button
-                        android:id="@+id/btn_choose"
-                        android:visibility="gone"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="用户选择" />
+                                android:id="@+id/include_HR"
+                                layout="@layout/mr_items"
+                                />
+
+                            <ImageView
+                                android:layout_width="match_parent"
+                                android:layout_height="2dp"
+                                android:contentDescription="@null"
+                                android:src="#000000" />
 
 
-                    <!--<Button-->
-                        <!--android:id="@+id/btn_doctor"-->
-                        <!--android:layout_width="wrap_content"-->
-                        <!--android:layout_height="wrap_content"-->
-                        <!--android:layout_toRightOf="@+id/btn_pause"-->
-                        <!--android:visibility="gone"-->
-                        <!--android:text="医生信息" />-->
+                            <include
+                                android:id="@+id/include_BP"
+                                layout="@layout/mr_items" />
 
-                    <!--<Button-->
-                        <!--android:id="@+id/btn_patient"-->
-                        <!--android:layout_width="wrap_content"-->
-                        <!--android:layout_height="wrap_content"-->
-                        <!--android:layout_toRightOf="@+id/btn_pause"-->
-                        <!--android:visibility="gone"-->
-                        <!--android:text="病人信息" />-->
+                            <ImageView
 
-                    <!--<Button-->
-                        <!--android:id="@+id/btn_ECG"-->
-                        <!--android:layout_width="wrap_content"-->
-                        <!--android:layout_height="wrap_content"-->
-                        <!--android:layout_toRightOf="@+id/btn_pause"-->
-                        <!--android:visibility="gone"-->
-                        <!--android:text="心电图介绍" />-->
+                                android:layout_width="match_parent"
+                                android:layout_height="2dp"
+                                android:contentDescription="@null"
+                                android:src="#000000" />
+
+                            <include
+                                android:id="@+id/include_PH"
+                                layout="@layout/mr_items" />
+
+                            <ImageView
+                                android:layout_width="match_parent"
+                                android:layout_height="2dp"
+                                android:contentDescription="@null"
+                                android:src="#000000" />
+
+                            <include
+                                android:id="@+id/include_PaCO2"
+                                layout="@layout/mr_items" />
+
+                            <ImageView
+                                android:layout_width="match_parent"
+                                android:layout_height="2dp"
+                                android:contentDescription="@null"
+                                android:src="#000000" />
+
+                            <!--                <include-->
+                            <!--                    android:id="@+id/include_K"-->
+                            <!--                    layout="@layout/mr_items" />-->
+                            <include
+                                android:id="@+id/include_T"
+                                layout="@layout/mr_items" />
+
+                        </LinearLayout>
+
+                        <ImageView
+                            android:id="@+id/iv_blackline"
+                            android:layout_width="2dp"
+                            android:layout_height="match_parent"
+                            android:layout_toEndOf="@+id/id_MR_layout1"
+                            android:contentDescription="@null"
+                            android:src="#000000" />
+
+                        <LinearLayout
+                            android:id="@+id/id_MR_layout2"
+                            android:layout_width="120dp"
+                            android:layout_height="match_parent"
+                            android:layout_toEndOf="@+id/iv_blackline"
+                            android:orientation="vertical">
+
+                            <include
+                                android:id="@+id/include_RR"
+                                layout="@layout/mr_items" />
+
+                            <ImageView
+                                android:layout_width="match_parent"
+                                android:layout_height="2dp"
+                                android:contentDescription="@null"
+                                android:src="#000000" />
+
+                            <include
+                                android:id="@+id/include_SPO2"
+                                layout="@layout/mr_items" />
+
+                            <ImageView
+                                android:layout_width="match_parent"
+                                android:layout_height="2dp"
+                                android:contentDescription="@null"
+                                android:src="#000000" />
+
+                            <include
+                                android:id="@+id/include_PaO2"
+                                layout="@layout/mr_items" />
+
+                            <ImageView
+                                android:layout_width="match_parent"
+                                android:layout_height="2dp"
+                                android:contentDescription="@null"
+                                android:src="#000000" />
+
+                            <include
+                                android:id="@+id/include_Mg"
+                                layout="@layout/mr_items" />
+
+                            <ImageView
+                                android:layout_width="match_parent"
+                                android:layout_height="2dp"
+                                android:contentDescription="@null"
+                                android:src="#000000" />
+
+                            <include
+                                android:id="@+id/include_Creat"
+                                layout="@layout/mr_items" />
+
+                        </LinearLayout>
+
+                    </RelativeLayout>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="20dp"
+                        android:layout_marginStart="5dp"
+                        android:layout_marginTop="10dp"
+                        android:text="Treatment List"
+                        android:textStyle="bold" />
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginBottom="5dp"
+                        android:background="@drawable/layout_border"
+                        android:padding="5dp">
+
+                        <LinearLayout
+                            android:id="@+id/id_TL_layout1"
+                            android:layout_width="125dp"
+                            android:layout_height="match_parent"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:id="@+id/id_TL_tv1"
+                                android:layout_width="match_parent"
+                                android:layout_height="30dp"
+                                android:background="#ff0000"
+                                android:gravity="center"
+
+                                android:text="EPI" />
+
+                            <ImageView
+                                android:layout_width="match_parent"
+                                android:layout_height="2dp"
+                                android:contentDescription="@null"
+                                android:src="#000000" />
+
+                            <TextView
+                                android:id="@+id/id_TL_tv2"
+                                android:layout_width="match_parent"
+                                android:layout_height="30dp"
+                                android:background="#ffc800"
+                                android:gravity="center"
+                                android:text="Vasopressin" />
+
+                            <ImageView
+                                android:layout_width="match_parent"
+                                android:layout_height="2dp"
+                                android:contentDescription="@null"
+                                android:src="#000000" />
+
+                            <TextView
+                                android:id="@+id/id_TL_tv3"
+                                android:layout_width="match_parent"
+                                android:layout_height="30dp"
+                                android:background="#00ff00"
+                                android:gravity="center"
+                                android:text="Amiodarone" />
+
+                            <ImageView
+                                android:layout_width="match_parent"
+                                android:layout_height="2dp"
+                                android:contentDescription="@null"
+                                android:src="#000000" />
+
+                            <TextView
+                                android:id="@+id/id_TL_tv4"
+                                android:layout_width="match_parent"
+                                android:layout_height="30dp"
+                                android:background="#00ff00"
+                                android:gravity="center"
+                                android:text="Calcium" />
+
+                        </LinearLayout>
+
+                        <ImageView
+                            android:id="@+id/iv_blackline1"
+                            android:layout_width="2dp"
+                            android:layout_height="126dp"
+                            android:layout_toEndOf="@+id/id_TL_layout1"
+                            android:contentDescription="@null"
+                            android:src="#000000" />
+
+                        <LinearLayout
+                            android:id="@+id/id_TL_layout2"
+                            android:layout_width="125dp"
+                            android:layout_height="match_parent"
+                            android:layout_toEndOf="@+id/iv_blackline1"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:id="@+id/id_TL_tv5"
+                                android:layout_width="match_parent"
+                                android:layout_height="30dp"
+                                android:background="#ffc800"
+                                android:gravity="center"
+                                android:text="Bicarbonate" />
+
+                            <ImageView
+                                android:layout_width="match_parent"
+                                android:layout_height="2dp"
+                                android:contentDescription="@null"
+                                android:src="#000000" />
+
+                            <TextView
+                                android:id="@+id/id_TL_tv6"
+                                android:layout_width="match_parent"
+                                android:layout_height="30dp"
+                                android:background="#00ff00"
+                                android:gravity="center"
+                                android:text="Levophed" />
+
+                            <ImageView
+                                android:layout_width="match_parent"
+                                android:layout_height="2dp"
+                                android:contentDescription="@null"
+                                android:src="#000000" />
+
+                            <TextView
+                                android:id="@+id/id_TL_tv7"
+                                android:layout_width="match_parent"
+                                android:layout_height="30dp"
+                                android:background="#00ff00"
+                                android:gravity="center"
+                                android:text="Magnesium" />
+
+                            <ImageView
+                                android:layout_width="match_parent"
+                                android:layout_height="2dp"
+                                android:contentDescription="@null"
+                                android:src="#000000" />
+
+                            <TextView
+                                android:id="@+id/id_TL_tv8"
+                                android:layout_width="match_parent"
+                                android:layout_height="30dp"
+                                android:background="#ffc800"
+                                android:gravity="center"
+                                android:text="Shock" />
+
+                        </LinearLayout>
+
+                    </RelativeLayout>
+
+
+
 
                 </LinearLayout>
-                <SurfaceView
-                    android:id="@+id/sfv"
-                    android:layout_width="match_parent"
+                <!--中间一列-->
+                <RelativeLayout
+                    android:id="@+id/id_middle_layout"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2.2"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp">
+
+                    <TextView
+                        android:id="@+id/id_tv_Heart"
+                        android:layout_width="match_parent"
+                        android:layout_height="20dp"
+                        android:layout_marginStart="5dp"
+                        android:text="Heart"
+                        android:textColor="#000000"
+                        android:textStyle="bold" />
+                    <!--<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<TJW心电图显示部分<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<    -->
+
+                    <RelativeLayout
+                        android:id="@+id/id_top_layout"
+                        android:layout_width="match_parent"
+                        android:layout_height="270dp"
+                        android:layout_below="@+id/id_tv_Heart"
+                        android:layout_marginBottom="5dp"
+                        android:background="@drawable/layout_border"
+                        android:gravity="center">
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:orientation="vertical">
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content">
+
+
+                                <Switch
+                                    android:id="@+id/switch1"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_alignParentLeft="true"
+                                    android:layout_alignParentTop="true"
+                                    android:text="心电传感器"
+                                    android:textOff="关闭"
+                                    android:onClick="ECG_Device_Switch"
+                                    android:textOn="打开" />
+
+
+                                <!--                    <Button-->
+                                <!--                        android:id="@+id/btn_start_device"-->
+                                <!--                        android:layout_width="0dp"-->
+                                <!--                        android:layout_weight="1"-->
+                                <!--                        android:layout_height="wrap_content"-->
+                                <!--                        android:text="启动传感器" />-->
+
+                                <!--                    <Button-->
+                                <!--                        android:id="@+id/btn_close_device"-->
+                                <!--                        android:layout_width="0dp"-->
+                                <!--                        android:layout_weight="1"-->
+                                <!--                        android:layout_height="wrap_content"-->
+                                <!--                        android:layout_toRightOf="@+id/btn_start_device"-->
+                                <!--                        android:text="关闭传感器" />-->
+
+
+                                <Button
+                                    android:id="@+id/btn_realDraw"
+                                    android:layout_width="0dp"
+                                    android:layout_weight="1"
+                                    android:layout_height="wrap_content"
+                                    android:layout_toRightOf="@+id/btn_readData"
+                                    android:text="实时绘图" />
+
+                                <Button
+                                    android:id="@+id/btn_pause"
+                                    android:layout_width="0dp"
+                                    android:layout_weight="1"
+                                    android:layout_height="wrap_content"
+                                    android:layout_toRightOf="@+id/btn_realDraw"
+                                    android:text="停止绘图" />
+                                <Button
+                                    android:id="@+id/btn_windowview"
+                                    android:layout_width="0dp"
+                                    android:layout_weight="1"
+                                    android:layout_height="wrap_content"
+                                    android:layout_toRightOf="@+id/btn_pause"
+                                    android:text="悬浮框" />
+                                <Button
+                                    android:id="@+id/btn_choose"
+                                    android:visibility="gone"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="用户选择" />
+
+
+                                <!--<Button-->
+                                <!--android:id="@+id/btn_doctor"-->
+                                <!--android:layout_width="wrap_content"-->
+                                <!--android:layout_height="wrap_content"-->
+                                <!--android:layout_toRightOf="@+id/btn_pause"-->
+                                <!--android:visibility="gone"-->
+                                <!--android:text="医生信息" />-->
+
+                                <!--<Button-->
+                                <!--android:id="@+id/btn_patient"-->
+                                <!--android:layout_width="wrap_content"-->
+                                <!--android:layout_height="wrap_content"-->
+                                <!--android:layout_toRightOf="@+id/btn_pause"-->
+                                <!--android:visibility="gone"-->
+                                <!--android:text="病人信息" />-->
+
+                                <!--<Button-->
+                                <!--android:id="@+id/btn_ECG"-->
+                                <!--android:layout_width="wrap_content"-->
+                                <!--android:layout_height="wrap_content"-->
+                                <!--android:layout_toRightOf="@+id/btn_pause"-->
+                                <!--android:visibility="gone"-->
+                                <!--android:text="心电图介绍" />-->
+
+                            </LinearLayout>
+                            <!--                <SurfaceView-->
+                            <!--                    android:id="@+id/sfv"-->
+                            <!--                    android:layout_width="match_parent"-->
+                            <!--                    android:layout_height="match_parent"-->
+                            <!--                />-->
+
+
+                            <com.giftedcat.wavelib.view.WaveView
+                                android:id="@+id/wave_view1"
+                                android:layout_width="match_parent"
+                                android:layout_height="1dp"
+                                android:layout_weight="1"
+                                android:layout_marginLeft="5dp"
+                                android:layout_marginRight="5dp"
+
+                                app:draw_mode="normal"
+                                app:max_value="30"
+                                app:wave_background="#000000"
+                                app:wave_line_color="#ffff00"
+                                app:wave_line_width="20" />
+
+
+
+                        </LinearLayout>
+                    </RelativeLayout>
+                    <!--&gt;>>>>>>>>>>>CPR（1）>>>EPR(1)>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>-->
+                    <LinearLayout
+                        android:id="@+id/id_TreatmentTimeSchedule_layout"
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:layout_below="@id/id_top_layout"
+                        android:background="@drawable/layout_border"
+                        android:gravity="center_vertical">
+
+                        <Button
+                            android:id="@+id/id_btn_CPR"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_marginStart="5dp"
+                            android:gravity="center"
+                            android:layout_weight="1"
+                            android:text="CPR(1)" />
+
+                        <TextView
+                            android:id="@+id/id_CPR_tv"
+                            android:layout_width="0dp"
+                            android:layout_weight="2"
+                            android:layout_height="match_parent"
+                            android:layout_alignBaseline="@+id/id_btn_CPR"
+                            android:layout_margin="5dp"
+                            android:layout_marginStart="2dp"
+                            android:layout_toEndOf="@+id/id_btn_CPR"
+                            android:background="@drawable/cpr_background"
+                            android:text="00:00"
+                            android:gravity="center" />
+
+                        <Button
+                            android:id="@+id/id_btn_EPI"
+                            android:layout_width="0dp"
+                            android:layout_weight="1"
+                            android:layout_height="match_parent"
+                            android:layout_marginStart="5dp"
+                            android:layout_toEndOf="@+id/id_CPR_tv"
+                            android:gravity="center"
+                            android:text="EPI(1)" />
+
+                        <TextView
+                            android:id="@+id/id_EPI_tv"
+                            android:layout_width="0dp"
+                            android:layout_weight="2"
+                            android:layout_height="match_parent"
+                            android:layout_alignBaseline="@+id/id_btn_EPI"
+                            android:layout_margin="5dp"
+                            android:layout_marginStart="2dp"
+                            android:layout_toEndOf="@+id/id_btn_EPI"
+                            android:background="@drawable/epi_background"
+                            android:text="00:00"
+                            android:gravity="center" />
+
+                    </LinearLayout>
+
+                    <TextView
+                        android:id="@+id/id_tv_PendingOrders"
+                        android:layout_width="match_parent"
+                        android:layout_height="20dp"
+                        android:layout_below="@+id/id_TreatmentTimeSchedule_layout"
+                        android:layout_marginStart="5dp"
+                        android:text="Pending Orders"
+                        android:textColor="#000000"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/id_tv_TreatmentLog"
+                        android:layout_width="match_parent"
+                        android:layout_height="20dp"
+                        android:layout_alignBaseline="@+id/id_tv_PendingOrders"
+                        android:layout_marginStart="310dp"
+                        android:text="Treatment Log"
+                        android:textColor="#000000"
+                        android:textStyle="bold" />
+
+
+
+
+
+                    <!--PendingOrders-->
+
+                    <RelativeLayout
+                        android:id="@+id/id_PendingOrders_layout"
+                        android:layout_width="250dp"
+                        android:layout_height="220dp"
+                        android:layout_below="@id/id_tv_PendingOrders"
+                        android:layout_marginTop="5dp"
+                        android:background="@drawable/layout_border">
+
+                        <LinearLayout
+                            android:id="@+id/id_PO_layout"
+                            android:layout_width="match_parent"
+                            android:layout_height="25dp"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:id="@+id/id_tv_title_Order"
+                                android:layout_width="0dp"
+                                android:layout_weight="1"
+                                android:layout_height="match_parent"
+                                android:background="@drawable/textview_border"
+                                android:gravity="center"
+                                android:text="Order" />
+
+                            <TextView
+                                android:id="@+id/id_tv_title_Amount"
+                                android:layout_width="0dp"
+                                android:layout_weight="1"
+                                android:layout_height="match_parent"
+                                android:layout_marginStart="1dp"
+                                android:background="@drawable/textview_border"
+                                android:gravity="center"
+                                android:text="Amount" />
+
+                            <TextView
+                                android:id="@+id/id_tv_title_Given"
+                                android:layout_width="0dp"
+                                android:layout_weight="1"
+                                android:layout_height="match_parent"
+                                android:layout_marginStart="1dp"
+                                android:background="@drawable/textview_border"
+                                android:gravity="center"
+                                android:text="Given" />
+
+                            <TextView
+                                android:id="@+id/id_tv_title_X"
+                                android:layout_width="0dp"
+                                android:layout_weight="1"
+                                android:layout_height="match_parent"
+                                android:layout_marginStart="1dp"
+                                android:background="@drawable/textview_border"
+                                android:gravity="center"
+                                android:text="X" />
+
+                        </LinearLayout>
+
+                        <include
+                            android:id="@+id/include_item1"
+                            layout="@layout/po_items"
+                            android:layout_width="match_parent"
+                            android:layout_height="30dp"
+                            android:layout_below="@+id/id_PO_layout" />
+
+                        <include
+                            android:id="@+id/include_item2"
+                            layout="@layout/po_items"
+                            android:layout_width="match_parent"
+                            android:layout_height="30dp"
+                            android:layout_below="@+id/include_item1" />
+
+                    </RelativeLayout>
+                    <!--Treatment Log 显示部分-->
+                    <RelativeLayout
+                        android:id="@+id/id_Treatment_Log_layout"
+                        android:layout_width="match_parent"
+                        android:layout_height="220dp"
+                        android:layout_below="@id/id_tv_TreatmentLog"
+                        android:layout_marginStart="5dp"
+                        android:layout_marginTop="5dp"
+                        android:layout_toEndOf="@+id/id_PendingOrders_layout"
+                        android:background="@drawable/layout_border">
+
+                        <LinearLayout
+                            android:id="@+id/id_TLog_layout"
+                            android:layout_width="match_parent"
+                            android:layout_height="25dp"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:id="@+id/id_tv_title_Rhythm"
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:background="@drawable/textview_border"
+                                android:gravity="center"
+                                android:text="Rhythm" />
+
+                            <TextView
+                                android:id="@+id/id_tv_title_Time"
+                                android:layout_width="0dp"
+                                android:layout_weight="1"
+                                android:layout_height="match_parent"
+                                android:layout_marginStart="1dp"
+                                android:background="@drawable/textview_border"
+                                android:gravity="center"
+                                android:text="Time" />
+
+                            <TextView
+                                android:id="@+id/id_tv_title_Treatment"
+                                android:layout_width="0dp"
+                                android:layout_weight="1"
+                                android:layout_height="match_parent"
+                                android:layout_marginStart="1dp"
+                                android:background="@drawable/textview_border"
+                                android:gravity="center"
+                                android:text="Treatment" />
+
+                            <TextView
+                                android:id="@+id/id_tv_title_Amount1"
+                                android:layout_width="0dp"
+                                android:layout_weight="1"
+                                android:layout_height="match_parent"
+                                android:layout_marginStart="1dp"
+                                android:background="@drawable/textview_border"
+                                android:gravity="center"
+                                android:text="Amount" />
+
+                            <TextView
+                                android:id="@+id/id_tv_title_Count1"
+                                android:layout_width="0dp"
+                                android:layout_weight="1"
+                                android:layout_height="match_parent"
+                                android:layout_marginStart="1dp"
+                                android:background="@drawable/textview_border"
+                                android:gravity="center"
+                                android:text="Count" />
+
+                        </LinearLayout>
+
+                        <include
+                            android:id="@+id/include_tl_item1"
+                            layout="@layout/tl_items1"
+                            android:layout_width="match_parent"
+                            android:layout_height="25dp"
+                            android:layout_below="@+id/id_TLog_layout" />
+
+                        <include
+                            android:id="@+id/include_tl_item2"
+                            layout="@layout/tl_items2"
+                            android:layout_width="match_parent"
+                            android:layout_height="25dp"
+                            android:layout_below="@+id/include_tl_item1" />
+
+
+                    </RelativeLayout>
+
+
+
+
+
+
+                </RelativeLayout>
+                <!--右边一列-->
+                <RelativeLayout
+                    android:id="@+id/id_right_layout"
+                    android:layout_width="0dp"
                     android:layout_height="match_parent"
-                />
+                    android:layout_weight="1"
+                    android:background="@drawable/layout_border">
+
+                    <TextClock
+                        android:id="@+id/id_tv_TimeClock"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:format12Hour="yyyy/MM/dd HH:mm:ss"
+                        android:format24Hour="yyyy/MM/dd HH:mm:ss"
+                        android:gravity="center" />
+
+                    <TextView
+                        android:id="@+id/id_tv_StartTime"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/id_tv_TimeClock"
+                        android:layout_marginStart="20dp"
+                        android:layout_marginTop="5dp"
+                        android:textColor="#000000"
+                        android:text="StartTime:"
+                        android:textSize="17sp"
+                        android:textStyle="bold" />
+
+
+                    <TextView
+                        android:id="@+id/id_tv_starttime"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignBaseline="@+id/id_tv_StartTime"
+                        android:layout_marginStart="35dp"
+                        android:layout_toEndOf="@+id/id_tv_StartTime"
+                        android:textColor="#000000"
+                        android:text="00:00:00"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/id_tv_Duration"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/id_tv_StartTime"
+                        android:layout_alignEnd="@+id/id_tv_StartTime"
+                        android:layout_marginStart="20sp"
+                        android:layout_marginTop="5dp"
+                        android:textColor="#000000"
+                        android:text="Duration:"
+                        android:textSize="17sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/id_tv_duration"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_alignBaseline="@+id/id_tv_Duration"
+                        android:layout_alignStart="@+id/id_tv_starttime"
+                        android:layout_marginEnd="1dp"
+                        android:layout_toEndOf="@+id/id_tv_Duration"
+                        android:background="@drawable/tv_duration"
+                        android:paddingTop="1dp"
+                        android:paddingBottom="1dp"
+                        android:text="04:00"
+                        android:textColor="#00ff00"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/id_tv_VF"
+                        android:layout_width="match_parent"
+                        android:layout_height="60dp"
+                        android:layout_below="@+id/id_tv_Duration"
+                        android:layout_marginLeft="2dp"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginRight="2dp"
+                        android:background="@drawable/tv_vf"
+                        android:gravity="center"
+                        android:text="VF"
+                        android:textSize="22sp"
+                        android:textStyle="bold" />
+
+                    <include layout="@layout/layout_workflow"
+                        android:id="@+id/include_layout_workflow"/>
+
+                    <!--        <include layout="@layout/layout_below_workflow"-->
+                    <!--            android:id="@+id/include_layout_below_workflow"/>-->
+
+                </RelativeLayout>
+
+
+
             </LinearLayout>
-        </RelativeLayout>
-<!--&gt;>>>>>>>>>>>CPR（1）>>>EPR(1)>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>-->
-        <LinearLayout
-            android:id="@+id/id_TreatmentTimeSchedule_layout"
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:layout_below="@id/id_top_layout"
-            android:background="@drawable/layout_border"
-            android:gravity="center_vertical">
 
-            <Button
-                android:id="@+id/id_btn_CPR"
-                android:layout_width="0dp"
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginStart="5dp"
-                android:gravity="center"
-                android:layout_weight="1"
-                android:text="CPR(1)" />
+                android:orientation="horizontal">
+                <!--第一列 最下面-->
+                <RelativeLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@drawable/layout_border"
+                    >
 
-            <TextView
-                android:id="@+id/id_CPR_tv"
-                android:layout_width="0dp"
-                android:layout_weight="2"
-                android:layout_height="match_parent"
-                android:layout_alignBaseline="@+id/id_btn_CPR"
-                android:layout_margin="5dp"
-                android:layout_marginStart="2dp"
-                android:layout_toEndOf="@+id/id_btn_CPR"
-                android:background="@drawable/cpr_background"
-                android:text="00:00"
-                android:gravity="center" />
 
-            <Button
-                android:id="@+id/id_btn_EPI"
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="match_parent"
-                android:layout_marginStart="5dp"
-                android:layout_toEndOf="@+id/id_CPR_tv"
-                android:gravity="center"
-                android:text="EPI(1)" />
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/id_EPI_tv"
-                android:layout_width="0dp"
-                android:layout_weight="2"
-                android:layout_height="match_parent"
-                android:layout_alignBaseline="@+id/id_btn_EPI"
-                android:layout_margin="5dp"
-                android:layout_marginStart="2dp"
-                android:layout_toEndOf="@+id/id_btn_EPI"
-                android:background="@drawable/epi_background"
-                android:text="00:00"
-                android:gravity="center" />
+                        <TextView
+                            android:id="@+id/id_tv_fragment1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="50dp"
+                            android:layout_marginStart="3dp"
+                            android:background="@drawable/textview_border"
+                            android:gravity="center"
+                            android:padding="3dp"
+                            android:text="Cardiac resuscitation posture detection"
+                            android:textSize="15sp" />
+
+
+                        <LinearLayout
+                            android:id="@+id/id_title_layout"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="3dp"
+                            android:orientation="horizontal">
+
+
+                            <TextView
+                                android:id="@+id/id_tv_fragment2"
+                                android:layout_width="wrap_content"
+                                android:layout_height="40dp"
+                                android:layout_marginLeft="2dp"
+                                android:layout_marginRight="2dp"
+                                android:background="@drawable/textview_border"
+                                android:gravity="center"
+                                android:padding="3dp"
+                                android:text="Labs"
+                                android:textSize="15sp" />
+
+                            <TextView
+                                android:id="@+id/id_tv_fragment3"
+                                android:layout_width="wrap_content"
+                                android:layout_height="40dp"
+                                android:layout_marginEnd="2dp"
+                                android:background="@drawable/textview_border"
+                                android:gravity="center"
+                                android:padding="3dp"
+                                android:text="Msg"
+                                android:textSize="15sp" />
+
+                            <TextView
+                                android:id="@+id/id_tv_fragment4"
+                                android:layout_width="wrap_content"
+                                android:layout_height="40dp"
+                                android:background="@drawable/textview_border"
+                                android:gravity="center"
+                                android:padding="3dp"
+                                android:text="X-ray"
+                                android:textSize="15sp" />
+
+                        </LinearLayout>
+
+                        <FrameLayout
+                            android:id="@+id/id_fragment"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_below="@+id/id_title_layout"
+                            android:layout_margin="2dp">
+
+                        </FrameLayout>
+
+                    </LinearLayout>
+
+
+
+                </RelativeLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="3.2"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/id_tv_TimelineLog"
+                        android:layout_width="match_parent"
+                        android:layout_height="20dp"
+                        android:gravity="center"
+                        android:layout_below="@+id/id_Treatment_Log_layout"
+                        android:textStyle="bold"
+                        android:textSize="16sp"
+                        android:textColor="#000000"
+                        android:text="Timeline Log" />
+                    <!--Timeline Log 显示部分-->
+
+                    <LinearLayout
+                        android:id="@+id/id_Timeline_Log_layout"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_below="@id/id_tv_TimelineLog"
+                        android:layout_marginTop="5dp"
+                        android:background="@drawable/layout_border">
+
+
+
+
+                        <RelativeLayout
+                            android:id="@+id/id_MyPaint_layout"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="15"
+                            android:layout_marginStart="5dp">
+
+                            <ImageView
+                                android:id="@+id/iv_canvas"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_marginTop="3dp"
+                                android:layout_marginBottom="5dp" />
+
+                        </RelativeLayout>
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:orientation="vertical"
+                            android:layout_marginStart="2dp"
+                            android:layout_toEndOf="@+id/id_MyPaint_layout">
+
+                            <ImageView
+                                android:id="@+id/id_ib_reset1"
+                                android:layout_width="50dp"
+                                android:layout_height="65dp"
+                                android:layout_marginTop="8dp"
+                                android:padding="5dp"
+                                android:background="@drawable/button_border"
+                                android:src="@drawable/locate" />
+
+                            <ImageView
+                                android:id="@+id/id_ib_scale_up1"
+                                android:layout_width="50dp"
+                                android:layout_height="65dp"
+                                android:padding="5dp"
+                                android:background="@drawable/button_border"
+                                android:layout_marginTop="2dp"
+                                android:layout_marginBottom="2dp"
+                                android:src="@drawable/scale_up" />
+
+                            <ImageView
+                                android:id="@+id/id_ib_scale_down1"
+                                android:layout_width="50dp"
+                                android:layout_height="65dp"
+                                android:padding="5dp"
+                                android:background="@drawable/button_border"
+                                android:src="@drawable/scale_down" />
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+
+                </LinearLayout>
+
+
+
+
+            </LinearLayout>
+
 
         </LinearLayout>
-
-        <TextView
-            android:id="@+id/id_tv_PendingOrders"
-            android:layout_width="match_parent"
-            android:layout_height="20dp"
-            android:layout_below="@+id/id_TreatmentTimeSchedule_layout"
-            android:layout_marginStart="5dp"
-            android:text="Pending Orders"
-            android:textColor="#000000"
-            android:textStyle="bold" />
-
-        <TextView
-            android:id="@+id/id_tv_TreatmentLog"
-            android:layout_width="match_parent"
-            android:layout_height="20dp"
-            android:layout_alignBaseline="@+id/id_tv_PendingOrders"
-            android:layout_marginStart="310dp"
-            android:text="Treatment Log"
-            android:textColor="#000000"
-            android:textStyle="bold" />
-
-
-
-
-
-<!--PendingOrders-->
-
-        <RelativeLayout
-            android:id="@+id/id_PendingOrders_layout"
-            android:layout_width="250dp"
-            android:layout_height="220dp"
-            android:layout_below="@id/id_tv_PendingOrders"
-            android:layout_marginTop="5dp"
-            android:background="@drawable/layout_border">
-
-            <LinearLayout
-                android:id="@+id/id_PO_layout"
-                android:layout_width="match_parent"
-                android:layout_height="25dp"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:id="@+id/id_tv_title_Order"
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
-                    android:layout_height="match_parent"
-                    android:background="@drawable/textview_border"
-                    android:gravity="center"
-                    android:text="Order" />
-
-                <TextView
-                    android:id="@+id/id_tv_title_Amount"
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
-                    android:layout_height="match_parent"
-                    android:layout_marginStart="1dp"
-                    android:background="@drawable/textview_border"
-                    android:gravity="center"
-                    android:text="Amount" />
-
-                <TextView
-                    android:id="@+id/id_tv_title_Given"
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
-                    android:layout_height="match_parent"
-                    android:layout_marginStart="1dp"
-                    android:background="@drawable/textview_border"
-                    android:gravity="center"
-                    android:text="Given" />
-
-                <TextView
-                    android:id="@+id/id_tv_title_X"
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
-                    android:layout_height="match_parent"
-                    android:layout_marginStart="1dp"
-                    android:background="@drawable/textview_border"
-                    android:gravity="center"
-                    android:text="X" />
-
-            </LinearLayout>
-
-            <include
-                android:id="@+id/include_item1"
-                layout="@layout/po_items"
-                android:layout_width="match_parent"
-                android:layout_height="30dp"
-                android:layout_below="@+id/id_PO_layout" />
-
-            <include
-                android:id="@+id/include_item2"
-                layout="@layout/po_items"
-                android:layout_width="match_parent"
-                android:layout_height="30dp"
-                android:layout_below="@+id/include_item1" />
-
-        </RelativeLayout>
-<!--Treatment Log 显示部分-->
-        <RelativeLayout
-            android:id="@+id/id_Treatment_Log_layout"
-            android:layout_width="match_parent"
-            android:layout_height="220dp"
-            android:layout_below="@id/id_tv_TreatmentLog"
-            android:layout_marginStart="5dp"
-            android:layout_marginTop="5dp"
-            android:layout_toEndOf="@+id/id_PendingOrders_layout"
-            android:background="@drawable/layout_border">
-
-            <LinearLayout
-                android:id="@+id/id_TLog_layout"
-                android:layout_width="match_parent"
-                android:layout_height="25dp"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:id="@+id/id_tv_title_Rhythm"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:background="@drawable/textview_border"
-                    android:gravity="center"
-                    android:text="Rhythm" />
-
-                <TextView
-                    android:id="@+id/id_tv_title_Time"
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
-                    android:layout_height="match_parent"
-                    android:layout_marginStart="1dp"
-                    android:background="@drawable/textview_border"
-                    android:gravity="center"
-                    android:text="Time" />
-
-                <TextView
-                    android:id="@+id/id_tv_title_Treatment"
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
-                    android:layout_height="match_parent"
-                    android:layout_marginStart="1dp"
-                    android:background="@drawable/textview_border"
-                    android:gravity="center"
-                    android:text="Treatment" />
-
-                <TextView
-                    android:id="@+id/id_tv_title_Amount1"
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
-                    android:layout_height="match_parent"
-                    android:layout_marginStart="1dp"
-                    android:background="@drawable/textview_border"
-                    android:gravity="center"
-                    android:text="Amount" />
-
-                <TextView
-                    android:id="@+id/id_tv_title_Count1"
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
-                    android:layout_height="match_parent"
-                    android:layout_marginStart="1dp"
-                    android:background="@drawable/textview_border"
-                    android:gravity="center"
-                    android:text="Count" />
-
-            </LinearLayout>
-
-            <include
-                android:id="@+id/include_tl_item1"
-                layout="@layout/tl_items1"
-                android:layout_width="match_parent"
-                android:layout_height="25dp"
-                android:layout_below="@+id/id_TLog_layout" />
-
-            <include
-                android:id="@+id/include_tl_item2"
-                layout="@layout/tl_items2"
-                android:layout_width="match_parent"
-                android:layout_height="25dp"
-                android:layout_below="@+id/include_tl_item1" />
-
-
-        </RelativeLayout>
-
-
-
-        <TextView
-            android:id="@+id/id_tv_TimelineLog"
-            android:layout_width="wrap_content"
-            android:layout_height="20dp"
-            android:layout_centerHorizontal="true"
-            android:layout_below="@+id/id_Treatment_Log_layout"
-            android:textStyle="bold"
-            android:textSize="16sp"
-            android:textColor="#000000"
-            android:text="Timeline Log" />
-<!--Timeline Log 显示部分-->
-        <LinearLayout
-            android:id="@+id/id_Timeline_Log_layout"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="horizontal"
-            android:layout_below="@id/id_tv_TimelineLog"
-            android:layout_marginTop="5dp"
-            android:background="@drawable/layout_border">
-
-            <RelativeLayout
-                android:id="@+id/id_MyPaint_layout"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="15"
-                android:layout_marginStart="5dp">
-
-                <ImageView
-                    android:id="@+id/iv_canvas"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginBottom="5dp"
-                    android:layout_marginTop="3dp" />
-
-            </RelativeLayout>
-
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:orientation="vertical"
-                android:layout_marginStart="2dp"
-                android:layout_toEndOf="@+id/id_MyPaint_layout">
-
-                <ImageView
-                    android:id="@+id/id_ib_reset1"
-                    android:layout_width="50dp"
-                    android:layout_height="65dp"
-                    android:layout_marginTop="8dp"
-                    android:padding="5dp"
-                    android:background="@drawable/button_border"
-                    android:src="@drawable/locate" />
-
-                <ImageView
-                    android:id="@+id/id_ib_scale_up1"
-                    android:layout_width="50dp"
-                    android:layout_height="65dp"
-                    android:padding="5dp"
-                    android:background="@drawable/button_border"
-                    android:layout_marginTop="2dp"
-                    android:layout_marginBottom="2dp"
-                    android:src="@drawable/scale_up" />
-
-                <ImageView
-                    android:id="@+id/id_ib_scale_down1"
-                    android:layout_width="50dp"
-                    android:layout_height="65dp"
-                    android:padding="5dp"
-                    android:background="@drawable/button_border"
-                    android:src="@drawable/scale_down" />
-
-            </LinearLayout>
-
-        </LinearLayout>
-
-
-    </RelativeLayout>
-<!--右边一列-->
-    <RelativeLayout
-        android:id="@+id/id_right_layout"
-        android:layout_width="0dp"
-        android:layout_height="match_parent"
-        android:layout_weight="1"
-        android:background="@drawable/layout_border">
-
-        <TextClock
-            android:id="@+id/id_tv_TimeClock"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:format12Hour="yyyy/MM/dd HH:mm:ss"
-            android:format24Hour="yyyy/MM/dd HH:mm:ss"
-            android:gravity="center" />
-
-        <TextView
-            android:id="@+id/id_tv_StartTime"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/id_tv_TimeClock"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="5dp"
-            android:textColor="#000000"
-            android:text="StartTime:"
-            android:textSize="17sp"
-            android:textStyle="bold" />
-
-
-        <TextView
-            android:id="@+id/id_tv_starttime"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignBaseline="@+id/id_tv_StartTime"
-            android:layout_marginStart="35dp"
-            android:layout_toEndOf="@+id/id_tv_StartTime"
-            android:textColor="#000000"
-            android:text="00:00:00"
-            android:textSize="16sp"
-            android:textStyle="bold" />
-
-        <TextView
-            android:id="@+id/id_tv_Duration"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/id_tv_StartTime"
-            android:layout_alignEnd="@+id/id_tv_StartTime"
-            android:layout_marginStart="20sp"
-            android:layout_marginTop="5dp"
-            android:textColor="#000000"
-            android:text="Duration:"
-            android:textSize="17sp"
-            android:textStyle="bold" />
-
-        <TextView
-            android:id="@+id/id_tv_duration"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignBaseline="@+id/id_tv_Duration"
-            android:layout_alignStart="@+id/id_tv_starttime"
-            android:layout_marginEnd="1dp"
-            android:layout_toEndOf="@+id/id_tv_Duration"
-            android:background="@drawable/tv_duration"
-            android:paddingTop="1dp"
-            android:paddingBottom="1dp"
-            android:text="04:00"
-            android:textColor="#00ff00"
-            android:textSize="16sp"
-            android:textStyle="bold" />
-
-        <TextView
-            android:id="@+id/id_tv_VF"
-            android:layout_width="match_parent"
-            android:layout_height="60dp"
-            android:layout_below="@+id/id_tv_Duration"
-            android:layout_marginLeft="2dp"
-            android:layout_marginTop="5dp"
-            android:layout_marginRight="2dp"
-            android:background="@drawable/tv_vf"
-            android:gravity="center"
-            android:text="VF"
-            android:textSize="22sp"
-            android:textStyle="bold" />
-
-        <include layout="@layout/layout_workflow"
-            android:id="@+id/include_layout_workflow"/>
-
-        <include layout="@layout/layout_below_workflow"
-            android:id="@+id/include_layout_below_workflow"/>
-
-    </RelativeLayout>
-
-
-
-</LinearLayout>
     </HorizontalScrollView>
 </ScrollView>

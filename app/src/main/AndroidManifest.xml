@@ -5,18 +5,21 @@
     <uses-permission android:name="android.permission.INTERNET" /> <!-- 允许程序添加悬浮窗 -->
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
 
+
     <application
         android:allowBackup="true"
-        android:icon="@drawable/yl"
+        android:icon="@mipmap/icon_01"
         android:label="@string/app_name"
-        android:roundIcon="@drawable/yl"
+        android:roundIcon="@mipmap/icon_02"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
+        android:networkSecurityConfig="@xml/network"
         >
         <activity
             android:name=".Main2Activity"
             android:label="@string/title_activity_main2"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar"/>
+
         <activity android:name=".ECGIntroduceActivity" />
         <activity android:name=".LoginActivity">
 <!--            <intent-filter>-->
@@ -25,6 +28,7 @@
 <!--                <category android:name="android.intent.category.LAUNCHER" />-->
 <!--            </intent-filter>-->
         </activity>
+
 
 
 

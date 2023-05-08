@@ -1,104 +1,103 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/bg_2"
+    android:orientation="vertical"
+    android:weightSum="100"
     >
-
-    <android.support.v7.widget.Toolbar
-        android:id="@+id/toolbar"
+<!--    标题栏-->
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        android:background="@drawable/bar"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
+        android:layout_height="0dp"
+        android:layout_weight="10"
+        android:background="@color/color_app_main">
+<!--        标题栏文本-->
         <TextView
-            android:id="@+id/text_bar"
+            android:layout_marginLeft="10dp"
+            android:layout_gravity="center_vertical"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
             android:text="@string/app_name"
-            android:textSize="25dp" />
+            android:textColor="@color/color_app_blendingColor1"
+            android:textSize="20sp"
+            >
+        </TextView>
+    </LinearLayout>
 
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="30"
+        android:src="@drawable/img_bg_login"
+        android:scaleType="centerCrop">
 
-    </android.support.v7.widget.Toolbar>
+    </ImageView>
+<!--    登入组件区-->
+    <LinearLayout
+        android:layout_margin="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:weightSum="100"
+        android:layout_weight="50"
+        android:orientation="vertical">
+<!--        账号输入区-->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_weight="12"
+            android:text="用户名:"
+            android:textSize="22sp"
+            android:layout_marginBottom="10dp">
 
-
-    <android.support.constraint.ConstraintLayout
-        android:id="@+id/login_et"
-        android:layout_width="346dp"
-        android:layout_height="273dp"
-        android:background="@drawable/bg_1"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.501"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar">
-
+        </TextView>
         <EditText
             android:id="@+id/et_username"
-            android:layout_width="250dp"
-            android:layout_height="55dp"
-            android:layout_marginTop="32dp"
-            android:background="@drawable/edit_selector"
-            android:drawableLeft="@drawable/user"
-            android:drawablePadding="10dp"
-            android:ems="10"
-            android:hint="请输入用户名"
-            android:inputType="textPersonName"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.493"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="16"
+            android:layout_marginBottom="10dp"
+            android:hint="请输入账号!">
 
+        </EditText>
+<!--        密码输入区-->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_weight="12"
+            android:text="密码:"
+            android:textSize="22sp"
+            android:layout_marginBottom="10dp">
+
+        </TextView>
         <EditText
             android:id="@+id/et_password"
-            android:layout_width="250dp"
-            android:layout_height="55dp"
-            android:layout_marginTop="32dp"
-            android:background="@drawable/edit_selector"
-            android:drawableLeft="@drawable/password"
-            android:drawablePadding="10dp"
-            android:ems="10"
-
-            android:hint="请输入密码"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="16"
             android:inputType="textPassword"
-            app:layout_constraintEnd_toEndOf="@+id/et_username"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="@+id/et_username"
-            app:layout_constraintTop_toBottomOf="@+id/et_username" />
+            android:hint="请输入密码!">
 
+        </EditText>
+<!--        登入按钮-->
         <Button
             android:id="@+id/btn_login"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="28dp"
-            android:layout_marginEnd="44dp"
-            android:background="@drawable/shape"
-            android:text="登录"
-            app:layout_constraintEnd_toStartOf="@+id/guideline6"
-            app:layout_constraintTop_toBottomOf="@+id/et_password" />
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="16"
+            android:text="登入系统">
 
+        </Button>
+<!--        注册按钮-->
         <Button
             android:id="@+id/btn_register"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="45dp"
-            android:background="@drawable/shape"
-            android:text="注册"
-            app:layout_constraintStart_toStartOf="@+id/guideline6"
-            app:layout_constraintTop_toTopOf="@+id/btn_login" />
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="16"
+            android:text="注册账号">
 
-        <android.support.constraint.Guideline
-            android:id="@+id/guideline6"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            app:layout_constraintGuide_percent="0.5" />
-    </android.support.constraint.ConstraintLayout>
-
-</android.support.constraint.ConstraintLayout>
+        </Button>
+    </LinearLayout>
+</LinearLayout>

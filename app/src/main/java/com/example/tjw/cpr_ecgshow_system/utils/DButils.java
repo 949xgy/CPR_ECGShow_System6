@@ -2,15 +2,10 @@ package com.example.tjw.cpr_ecgshow_system.utils;
 
 
 
-import android.util.Log;
+import org.junit.Test;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
-import java.util.HashMap;
 
 public class DButils {
 
@@ -19,7 +14,8 @@ public class DButils {
 
     public static Connection ConnMysql (){
         //要连接的数据库url,注意：此处连接的应该是服务器上的MySQl的地址
-        String url = "jdbc:mysql://1.116.196.98:3306/CPR_system?useSSL=false&useUnicode=true&characterEncoding=UTF-8";
+        String url = "jdbc:mysql://1.116.196.98:3306/CPR_system?useSSL=false&useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC";
+
         //连接数据库使用的用户名
         String userName = "root";
         //连接的数据库时使用的密码
@@ -74,7 +70,10 @@ public class DButils {
         return connection;
     }
 
-
+@Test
+public void test(){
+    ConnMysql();
+}
 
     }
 

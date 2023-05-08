@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#008577</color>
-    <color name="colorPrimaryDark">#00574B</color>
+    <color name="colorPrimary">#008FEC</color>
+    <color name="colorPrimaryDark">#008FEC</color>
     <color name="colorAccent">#D81B60</color>
     <color name="colorRed">#ff0000</color>
     <color name="colorBlack">#000</color>
@@ -14,6 +14,10 @@
     <color name="secondary_text">#727272</color>
     <color name="icons">#FFFFFF</color>
     <color name="divider">#B6B6B6</color>
+
+    <color name="color_app_main">#008FEC</color>
+    <color name="color_app_blendingColor1">#FFFFFF</color>
+    <color name="color_app_blendingColor2">#EBEFF3</color>
 
     <color name="primary_light_alpha50">#7FCFD8DC</color>
 

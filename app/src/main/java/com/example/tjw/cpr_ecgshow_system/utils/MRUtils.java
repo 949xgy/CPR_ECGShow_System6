@@ -47,8 +47,12 @@ public class MRUtils {
         id_hashMap.put("Mg", R.id.include_Mg);
         color_hashMap.put("Mg", new Double[]{0.5, 0.75, 1.02, 1.3});
 
-        id_hashMap.put("K", R.id.include_K);
-        color_hashMap.put("K", new Double[]{30.0, 60.0, 100.0, 130.0});
+//        id_hashMap.put("K", R.id.include_K);
+//        color_hashMap.put("K", new Double[]{30.0, 60.0, 100.0, 130.0});
+
+        id_hashMap.put("T", R.id.include_T);
+        color_hashMap.put("T", new Double[]{35.0, 36.2, 37.3, 37.8});
+
 
         id_hashMap.put("Creat", R.id.include_Creat);
         color_hashMap.put("Creat", new Double[]{37.0, 57.0, 97.0, 117.0});

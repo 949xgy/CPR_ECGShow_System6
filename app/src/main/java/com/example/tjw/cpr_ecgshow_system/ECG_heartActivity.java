@@ -45,10 +45,14 @@ public class ECG_heartActivity extends AppCompatActivity implements ViewPager.On
         mIcons.add(R.drawable.tab1);
 
 
+
         mAdapter = new DemoImitationLoopPagerAdapter(getSupportFragmentManager());
         mAdapter.addAllTitle(mItems);
         mAdapter.addAllIcon(mIcons);
-        mViewPager = (ViewPager) findViewById(R.id.view_pager);
+
+
+
+        mViewPager = (ViewPager)findViewById(R.id.view_pager);
         mViewPager.setOffscreenPageLimit(5);
         mViewPager.setAdapter(mAdapter);
         mViewPager.setCurrentItem(mAdapter.getCenterPosition(0));

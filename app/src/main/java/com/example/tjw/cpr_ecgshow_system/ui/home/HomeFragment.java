@@ -74,7 +74,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
 
                 Log.i("TAG", "点击了常见心电图按钮");
                 //fragment 跳转action
-                intent = new Intent(getActivity(), ECG_heartActivity.class);
+                intent = new Intent(getActivity(), ECGIntroduceActivity.class);
                 startActivity(intent);
 
                 break;

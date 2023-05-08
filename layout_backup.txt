@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.gallery.GalleryFragment"
+    android:background="@drawable/bg_1"
+    >
+
+    <TextView
+        android:id="@+id/et_doctorName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="36dp"
+        android:drawableLeft="@drawable/re_user"
+        android:drawablePadding="10dp"
+        android:ems="11"
+
+        android:inputType="textPersonName"
+        android:padding="1dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/et_doctorSex"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:layout_marginTop="15dp"
+
+        android:drawableLeft="@drawable/re_sex"
+        android:drawablePadding="10dp"
+
+        android:ems="11"
+        android:inputType="textPersonName"
+        app:layout_constraintEnd_toEndOf="@+id/et_doctorPhone"
+        app:layout_constraintTop_toBottomOf="@+id/et_doctorPhone" />
+
+    <TextView
+        android:id="@+id/et_doctorPhone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:drawableLeft="@drawable/re_phone"
+        android:drawablePadding="10dp"
+
+        android:ems="11"
+        android:inputType="phone"
+        app:layout_constraintEnd_toEndOf="@+id/et_doctorName"
+        app:layout_constraintTop_toBottomOf="@+id/et_doctorName" />
+
+    <TextView
+        android:id="@+id/et_doctorID"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:drawableLeft="@drawable/re_id"
+        android:drawablePadding="10dp"
+        android:layout_marginTop="15dp"
+        android:ems="11"
+
+        android:inputType="textPersonName"
+        app:layout_constraintEnd_toEndOf="@+id/et_doctorSex"
+        app:layout_constraintTop_toBottomOf="@+id/et_doctorSex" />
+
+    <TextView
+        android:id="@+id/et_doctorAge"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:drawableLeft="@drawable/re_age"
+        android:drawablePadding="10dp"
+        android:ems="11"
+        android:layout_marginTop="15dp"
+        android:inputType="number"
+        app:layout_constraintEnd_toEndOf="@+id/et_doctorID"
+        app:layout_constraintTop_toBottomOf="@+id/et_doctorID" />
+
+    <TextView
+        android:id="@+id/et_doctorDept"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:drawableLeft="@drawable/re_department"
+        android:drawablePadding="10dp"
+        android:ems="11"
+        android:layout_marginTop="15dp"
+        android:inputType="textPersonName"
+        app:layout_constraintEnd_toEndOf="@+id/et_doctorAge"
+        app:layout_constraintTop_toBottomOf="@+id/et_doctorAge" />
+
+    <TextView
+        android:id="@+id/et_doctorDuty"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:drawableLeft="@drawable/re_job"
+        android:drawablePadding="10dp"
+        android:ems="11"
+        android:layout_marginTop="15dp"
+        android:inputType="textPersonName"
+        app:layout_constraintEnd_toEndOf="@+id/et_doctorDept"
+        app:layout_constraintTop_toBottomOf="@+id/et_doctorDept" />
+
+    <TextView
+        android:id="@+id/et_doctorEmail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:drawableLeft="@drawable/re_email"
+        android:drawablePadding="10dp"
+        android:ems="11"
+        android:layout_marginTop="15dp"
+        android:inputType="textEmailAddress"
+        app:layout_constraintEnd_toEndOf="@+id/et_doctorDuty"
+        app:layout_constraintTop_toBottomOf="@+id/et_doctorDuty" />
+
+    <android.support.constraint.Guideline
+        android:id="@+id/guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.5" />
+
+
+    <Button
+        android:id="@+id/btn_update"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/shape"
+        android:text="修改"
+        app:layout_constraintEnd_toStartOf="@+id/guideline"
+        app:layout_constraintTop_toTopOf="@+id/btn_back" />
+
+    <Button
+        android:id="@+id/btn_back"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/shape"
+        android:text="返回"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/btn_update"
+        app:layout_constraintTop_toBottomOf="@+id/et_doctorEmail" />
+
+    <android.support.constraint.Guideline
+        android:id="@+id/guideline2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_begin="366dp" />
+
+
+</android.support.constraint.ConstraintLayout>

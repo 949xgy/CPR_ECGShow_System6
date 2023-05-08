@@ -18,7 +18,7 @@ public class Data_Map {
         all_data.put("PaO2","0");
         all_data.put("Mg","0");
         all_data.put("PaCO2","0");
-        all_data.put("K","0");
+        all_data.put("T","0");
         all_data.put("Creat","0");
     }
     public void putData(String key ,String val){

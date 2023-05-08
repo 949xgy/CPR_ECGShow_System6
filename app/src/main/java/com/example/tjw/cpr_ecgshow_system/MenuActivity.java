@@ -1,7 +1,7 @@
 package com.example.tjw.cpr_ecgshow_system;
 
+import android.app.Activity;
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
@@ -10,7 +10,7 @@ import com.example.tjw.cpr_ecgshow_system.domain.Doctor;
 import com.example.tjw.cpr_ecgshow_system.Dao.DoctorDao;
 
 
-public class MenuActivity extends AppCompatActivity {
+public class MenuActivity extends Activity {
     private ImageButton Image_doctor,Image_patient,Image_ECGShow,Image_ECGAnalysis;
     @Override
     protected void onCreate(Bundle savedInstanceState) {

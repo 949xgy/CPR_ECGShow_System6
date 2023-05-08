@@ -1,7 +1,10 @@
 package com.example.tjw.cpr_ecgshow_system.Dao;
 
 import android.content.Context;
+import android.os.Looper;
+import android.widget.Toast;
 
+import com.example.tjw.cpr_ecgshow_system.LoginActivity;
 import com.example.tjw.cpr_ecgshow_system.domain.Doctor;
 import com.example.tjw.cpr_ecgshow_system.utils.DButils;
 
@@ -22,14 +25,14 @@ public class DoctorDao {
     }
 
     //登录逻辑判断
-    public boolean login(String username,String password){
-
+    public Doctor login(String username,String password){
+            Doctor doctor = new Doctor();
             bo = false;
-                new Thread(){
+                Thread aa =new Thread(){
                     @Override
                     public void run() {
                         try {
-                            connMysql = DButils.ConnMysql();
+                           connMysql = DButils.ConnMysql();
                             String sql="select * from tb_doctor where doctorName=? and doctorPass=?";
                             PreparedStatement pst=connMysql.prepareStatement(sql);
                             pst.setString(1,username);
@@ -37,26 +40,28 @@ public class DoctorDao {
                             ResultSet rs=pst.executeQuery();
 
                             bo = rs.next();
-
+                            doctor.setDoctorName(rs.getString(2));
+                            doctor.setDoctorEmail(rs.getString(10));
                             rs.close();
                             pst.close();
                             connMysql.close();
-
-
                         } catch (SQLException  throwables) {
                             throwables.printStackTrace();
                         }
                     }
-                }.start();
+                };
+
+                aa.start();
 
 
-        try {
-            Thread.sleep(1000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
+        while (aa.isAlive()){
+
         }
-        System.out.println("准备返回login----->"+bo);
-        return bo;
+        if(bo){
+            return doctor;
+        }else {
+            return null;
+        }
     }
 
     //注册逻辑判断
@@ -64,7 +69,7 @@ public class DoctorDao {
 
         int result=0;
         bo = false;
-        new Thread(){
+      Thread aa = new Thread(){
             @Override
             public void run() {
                 try {
@@ -93,13 +98,12 @@ public class DoctorDao {
                     throwables.printStackTrace();
                 }
             }
-        }.start();
+        };
+      aa.start();
 
 
-        try {
-            Thread.sleep(1000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
+        while (aa.isAlive()){
+            System.out.println("准备返回aa.isAlive()----->"+aa.isAlive());
         }
 
         System.out.println("准备返回register----->"+bo);
@@ -110,7 +114,7 @@ public class DoctorDao {
     public boolean CheckIsDataAlreadyInDBorNot(String value) {
 
         bo = false;
-        new Thread(){
+       Thread aa=new Thread(){
             @Override
             public void run() {
                 try {
@@ -133,13 +137,12 @@ public class DoctorDao {
                     throwables.printStackTrace();
                 }
             }
-        }.start();
+        };
+       aa.start();
 
 
-        try {
-            Thread.sleep(1000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
+        while (aa.isAlive()){
+            System.out.println("准备返回aa.isAlive()----->"+aa.isAlive());
         }
 
         System.out.println("准备返回CheckIsDataAlreadyInDBorNot------->"+bo);
@@ -152,12 +155,11 @@ public class DoctorDao {
         Doctor doctor=new Doctor();
         doctor.setDoctorName(name);
 
-
-        new Thread(){
+      Thread aa= new Thread(){
             @Override
             public void run() {
                 try {
-                    connMysql = DButils.ConnMysql();
+                   connMysql = DButils.ConnMysql();
                     String sql="Select * from tb_doctor where doctorName =?";
                     PreparedStatement pst=connMysql.prepareStatement(sql);
                     pst.setString(1,name);
@@ -187,35 +189,30 @@ public class DoctorDao {
 
                     rs.close();
                     pst.close();
-                    connMysql.close();
+                  connMysql.close();
 
                 } catch (SQLException  throwables) {
                     throwables.printStackTrace();
                 }
             }
-        }.start();
+        };
+        aa.start();
 
+        while (aa.isAlive()){
 
-
-        try {
-            Thread.sleep(1000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
         }
-        System.out.println("FindDoctorByName---->准备返回doctor对象");
+
         return doctor;
     }
 
     //修改医生基本信息2.0
     public Boolean updateDoctor(String phone,String id,String age,String dept,String duty,String email,String name){
-
         int result=0;
         bo = false;
-        new Thread(){
+       Thread aa= new Thread(){
             @Override
             public void run() {
                 try {
-
                     connMysql = DButils.ConnMysql();
                     String update = "update tb_doctor set doctorPhone=?,doctorID=?,doctorAge=?,doctorDept=?,doctorDuty=?,doctorEmail=? where doctorName =?";
                     PreparedStatement pst=connMysql.prepareStatement(update);
@@ -238,16 +235,14 @@ public class DoctorDao {
                     throwables.printStackTrace();
                 }
             }
-        }.start();
+        };
+       aa.start();
 
 
-        try {
-            Thread.sleep(1000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
+        while (aa.isAlive()){
+
         }
 
-        System.out.println("准备返回updateDoctor---->"+bo);
         return bo;
 
 
@@ -259,7 +254,7 @@ public class DoctorDao {
 
         int result=0;
         bo = false;
-        new Thread(){
+        Thread aa=new Thread(){
             @Override
             public void run() {
                 try {
@@ -281,13 +276,12 @@ public class DoctorDao {
                     throwables.printStackTrace();
                 }
             }
-        }.start();
+        };
+        aa.start();
 
 
-        try {
-            Thread.sleep(1000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
+        while (aa.isAlive()){
+            System.out.println("准备返回aa.isAlive()----->"+aa.isAlive());
         }
 
         System.out.println("准备返回updatePass----->"+bo);
